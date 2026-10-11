@@ -45,7 +45,7 @@
         
          /* Styles pour le formulaire de commentaire sur une seule ligne */
         .zone-ascenseur-comm { max-height: 150px; overflow-y: auto; border: 1px solid #ccc; background: #fff; padding: 5px; border-radius: 4px; margin-bottom: 8px; }
-        .titre-section-comm { font-size: 14px; font-weight: bold; margin: 20px 0 8px 0; color: #495057; display: flex; align-items: center; }
+        .titre-section-comm { font-size: 14px; font-weight: bold; margin: 4px 0 8px 0; color: #495057; display: flex; align-items: center; }
         .ligne-comm { font-size: 12.5px; padding: 4px 6px; border-bottom: 1px dashed #eee; margin: 0; text-align: left; line-height: 1.4; }
         .bulle-nom { color: #007BFF; font-weight: bold; }
         
@@ -57,7 +57,7 @@
         .input-comm-msg { width: 75%; padding: 6px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; box-sizing: border-box; }
         
         /* Le bouton reste en dessous aligné à droite */
-        .zone-bouton-comm { display: flex; justify-content: flex-end; width: 100%; margin-bottom: 20px; }
+        .zone-bouton-comm { display: flex; justify-content: flex-end; width: 100%; margin-bottom: 4px; }
 
 
 
@@ -138,9 +138,11 @@
 
 
 
-     <div class="titre-section-comm">
-        <span class="pastille-jaune"></span> Échanges & Commentaires
+        <!-- Titre mis à jour avec la pastille jaune et l'icône de bulle -->
+    <div class="titre-section-comm">
+        <span class="pastille-jaune"></span> 💬 Échanges & Commentaires
     </div>
+
     <div class="zone-ascenseur-comm" id="liste-commentaires">
         <p class="ligne-comm" style="color:#aaa; font-style:italic;">Aucun échange pour le moment.</p>
     </div>
