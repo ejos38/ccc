@@ -44,10 +44,41 @@
         .no-sortie { color: #dc3545; font-style: italic; }
         
          /* Styles pour le formulaire de commentaire sur une seule ligne */
-        .zone-ascenseur-comm { max-height: 150px; overflow-y: auto; border: 1px solid #ccc; background: #fff; padding: 5px; border-radius: 4px; margin-bottom: 8px; }
+        /* 1. Cadre de l'ascenseur avec un fond gris-bleu très léger et des bords adoucis */
+        .zone-ascenseur-comm { 
+            max-height: 150px; 
+            overflow-y: auto; 
+            border: 1px solid #ced4da; 
+            background-color: #f0f4f8; /* Magnifique gris-bleu doux */
+            padding: 8px; 
+            border-radius: 6px; 
+            margin-bottom: 8px; 
+        }
+
         .titre-section-comm { font-size: 14px; font-weight: bold; margin: 4px 0 8px 0; color: #495057; display: flex; align-items: center; }
-        .ligne-comm { font-size: 12.5px; padding: 4px 6px; border-bottom: 1px dashed #eee; margin: 0; text-align: left; line-height: 1.4; }
-        .bulle-nom { color: #007BFF; font-weight: bold; }
+        
+/	* 2. Transformation des messages en véritables bulles de texte blanches et détachées */
+                 /* 2. Bulles de texte blanches avec écriture ultra-compacte */
+        .ligne-comm { 
+            font-size: 11.5px !important; /* Réduit la taille à 11.5px */
+            padding: 3px 6px; /* Serre l'espace intérieur au maximum */
+            background: #ffffff; 
+            border: 1px solid #e1e8ed; 
+            border-radius: 4px; 
+            margin: 0 0 4px 0; /* Rapproche les bulles les unes des autres */
+            text-align: left; 
+            line-height: 1.25; /* Serre les lignes pour un gain de place maximal */
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04); 
+        }
+
+
+
+        
+	/* Couleur spécifique pour le nom de l'auteur dans la bulle */
+        .bulle-nom { 
+            color: #0056b3; /* Bleu soutenu pour le nom de l'adhérent */
+            font-weight: bold; 
+        }
         
         /* Le conteneur redevient horizontal avec un alignement sur une seule ligne */
         .form-comm-horizontal { display: flex; flex-direction: row; gap: 10px; width: 100%; margin-bottom: 8px; }
@@ -57,8 +88,18 @@
         .input-comm-msg { width: 75%; padding: 6px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; box-sizing: border-box; }
         
         /* Le bouton reste en dessous aligné à droite */
-        .zone-bouton-comm { display: flex; justify-content: flex-end; width: 100%; margin-bottom: 4px; }
-
+	/* 3. Bouton "Envoyer" relooké en un beau vert de club de cyclisme */
+        /* Zone pour caler le bouton envoyer seul sur sa ligne en dessous et forcer l'alignement à droite */
+        .zone-bouton-comm { 
+            display: flex !important; 
+            justify-content: flex-end !important; /* Pousse le bouton tout en bout de ligne à droite */
+            width: 100%; 
+            margin-bottom: 4px !important; 
+        }
+		/* Petit effet de survol pour rendre le bouton interactif */
+       	 .zone-bouton-comm button:hover {
+            background-color: #218838 !important; /* Vert un peu plus foncé quand on passe la souris */
+        }
 
 
         /* Effet de pulsation de chargement corrigé et sécurisé */
