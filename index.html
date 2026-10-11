@@ -31,9 +31,13 @@
         .th-prouge { background-color: #ee4545 !important; color: #ffffff !important; }
         .th-noir { background-color: #434343 !important; color: #ffffff !important; }
         
-        /* Fenêtre avec ascenseur (Hauteur de 430px pour environ 12-15 lignes) */
-        .zone-ascenseur { max-height: 430px; overflow-y: auto; border: 1px solid #ccc; border-top: none; -webkit-overflow-scrolling: touch; }
-        @media (max-width: 600px) { .zone-ascenseur { max-height: 280px; } }
+        /* Liste des inscrits */
+        .zone-ascenseur { 
+            width: 100%;
+            margin-top: 0px;
+        }
+
+
         .table-corps-participants { width: 100%; border-collapse: collapse; table-layout: fixed; }
         .table-corps-participants td { padding: 8px; border: 1px solid #ccc; text-align: center; font-size: 13px; }
         
@@ -44,15 +48,14 @@
         .no-sortie { color: #dc3545; font-style: italic; }
         
          /* Styles pour le formulaire de commentaire sur une seule ligne */
-        /* 1. Cadre de l'ascenseur avec un fond gris-bleu très léger et des bords adoucis */
-        .zone-ascenseur-comm { 
-            max-height: 150px; 
-            overflow-y: auto; 
+      
+         .zone-ascenseur-comm { 
             border: 1px solid #ced4da; 
-            background-color: #f0f4f8; /* Magnifique gris-bleu doux */
-            padding: 8px; 
+            background-color: #f0f4f8; 
+            padding: 10px; 
             border-radius: 6px; 
-            margin-bottom: 8px; 
+            margin-bottom: 12px; 
+            margin-top: 10px;
         }
 
         .titre-section-comm { font-size: 14px; font-weight: bold; margin: 4px 0 8px 0; color: #495057; display: flex; align-items: center; }
@@ -296,7 +299,7 @@
                 let openrunnerNettoye = jourData.openrunner ? jourData.openrunner.toString().trim() : "";
                 let openrunnerLink = "Tracé N/C";
                 if (openrunnerNettoye !== "") {
-                    const urlComplete = openrunnerNettoye.startsWith("http") ? openrunnerNettoye : "https://openrunner.com" + openrunnerNettoye;
+                    const urlComplete = openrunnerNettoye.startsWith("http") ? openrunnerNettoye : "https://www.openrunner.com/route-details/" + openrunnerNettoye;
                     openrunnerLink = "<a href='" + urlComplete + "' target='_blank'>Tracé OpenRunner</a>";
                 }
                 
@@ -331,7 +334,7 @@
                 // VERROUILLAGE TECHNIQUE DE LA TAILLE PARFAITE À 13 PIXELS
                 container.innerHTML += "<p class='ligne-comm' style='font-size:13px !important; padding:4px 8px; margin:0 0 5px 0;'><span class='bulle-nom'>[" + m.nom + "]</span> : " + m.message + "</p>"; 
             });
-            container.scrollTop = container.scrollHeight;
+            
         }
 
 
@@ -383,7 +386,7 @@
             cacheInscrits.push({ nom: nom, niveau: rad.value, idUnique: idUniqueActif }); uiCompteurs();
             document.getElementById('comm-nom').value = nom; document.getElementById('nom').value = ""; document.getElementById('btn-annuler').style.display = "none";
             fetch(API_URL, { method: 'POST', body: JSON.stringify({ action: "inscrire", nom: nom, niveau: rad.value, idUnique: idUniqueActif }) }); rad.checked = false;
-            const asc = document.querySelector('.zone-ascenseur'); if (asc) asc.scrollTop = asc.scrollHeight;
+           
         });
 
         document.getElementById('btn-annuler').addEventListener('click', function() {
