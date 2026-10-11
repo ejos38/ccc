@@ -43,31 +43,22 @@
         .nb { display: block; font-weight: bold; font-size: 11px; margin-top: 4px; color: inherit; }
         .no-sortie { color: #dc3545; font-style: italic; }
         
-        /* Styles pour la zone des commentaires réorganisée */
+         /* Styles pour le formulaire de commentaire sur une seule ligne */
         .zone-ascenseur-comm { max-height: 150px; overflow-y: auto; border: 1px solid #ccc; background: #fff; padding: 5px; border-radius: 4px; margin-bottom: 8px; }
-        .titre-section-comm { font-size: 14px; font-weight: bold; margin: 20px 0 5px 0; color: #495057; }
-       /* La nouvelle bulle jaune stylisée */
-        .pastille-jaune { 
-            width: 12px; 
-            height: 12px; 
-            background-color: #FFD700; /* Jaune or vif */
-            border-radius: 50%; /* Rend la pastille parfaitement ronde */
-            display: inline-block; 
-            margin-right: 8px; /* Crée l'espace avec le texte */
-            box-shadow: 0 0 4px rgba(255, 215, 0, 0.5); /* Léger effet de brillance */
-        }
-	 .ligne-comm { font-size: 12.5px; padding: 4px 6px; border-bottom: 1px dashed #eee; margin: 0; text-align: left; line-height: 1.4; }
+        .titre-section-comm { font-size: 14px; font-weight: bold; margin: 20px 0 8px 0; color: #495057; display: flex; align-items: center; }
+        .ligne-comm { font-size: 12.5px; padding: 4px 6px; border-bottom: 1px dashed #eee; margin: 0; text-align: left; line-height: 1.4; }
         .bulle-nom { color: #007BFF; font-weight: bold; }
         
-        /* Modification : Le conteneur devient vertical pour empiler les éléments */
-        .form-comm-horizontal { display: flex; flex-direction: column; gap: 8px; width: 100%; margin-bottom: 15px; }
+        /* Le conteneur redevient horizontal avec un alignement sur une seule ligne */
+        .form-comm-horizontal { display: flex; flex-direction: row; gap: 10px; width: 100%; margin-bottom: 8px; }
         
-        /* Les deux cases de saisie prennent désormais 100% de la largeur du tableau */
-        .input-comm-nom { width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; box-sizing: border-box; }
-        .input-comm-msg { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; box-sizing: border-box; }
+        /* Répartition stricte de la largeur de la ligne */
+        .input-comm-nom { width: 25%; padding: 6px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; box-sizing: border-box; }
+        .input-comm-msg { width: 75%; padding: 6px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; box-sizing: border-box; }
         
-        /* Zone pour caler le bouton envoyer seul sur sa ligne en dessous */
-        .zone-bouton-comm { display: flex; justify-content: flex-end; width: 100%; }
+        /* Le bouton reste en dessous aligné à droite */
+        .zone-bouton-comm { display: flex; justify-content: flex-end; width: 100%; margin-bottom: 20px; }
+
 
 
         /* Effet de pulsation de chargement corrigé et sécurisé */
@@ -136,14 +127,15 @@
     <!-- SÉPARATEUR PHYSIQUE FORCE : Crée un espace réel de 25 pixels qui ne peut pas être annulé -->
     <div style="height: 25px; clear: both;"></div>
 
-       <!-- Formulaire de commentaire élargi sur toute la ligne -->
+          <!-- Formulaire de commentaire aligné sur une seule ligne (25% / 75%) -->
     <form id="form-commentaire" class="form-comm-horizontal">
         <input type="text" id="comm-nom" class="input-comm-nom" required placeholder="Votre Nom">
-        <input type="text" id="comm-msg" class="input-comm-msg" required placeholder="Écrivez un commentaire public pour cette sortie...">
-        <div class="zone-bouton-comm">
-            <button type="submit">Envoyer mon commentaire</button>
-        </div>
+        <input type="text" id="comm-msg" class="input-comm-msg" required placeholder="Écrivez un commentaire public...">
     </form>
+    <div class="zone-bouton-comm">
+        <button type="submit" form="form-commentaire">Envoyer mon commentaire</button>
+    </div>
+
 
 
      <div class="titre-section-comm">
