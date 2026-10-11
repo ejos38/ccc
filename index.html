@@ -60,7 +60,7 @@
 /	* 2. Transformation des messages en véritables bulles de texte blanches et détachées */
                  /* 2. Bulles de texte blanches avec écriture ultra-compacte */
         .ligne-comm { 
-            font-size: 11.5px !important; /* Réduit la taille à 11.5px */
+            font-size: 13.5px !important; /* Réduit la taille à 11.5px */
             padding: 3px 6px; /* Serre l'espace intérieur au maximum */
             background: #ffffff; 
             border: 1px solid #e1e8ed; 
@@ -255,34 +255,50 @@
             afficherDetailsEtInscrits();
         }
 
-        function afficherDetailsEtInscrits() {
+                function afficherDetailsEtInscrits() {
             const jourData = cacheJoursSemaine.find(j => j.idUnique === idUniqueActif);
             const blocDetails = document.getElementById('bloc-details-parcours');
             const formTable = document.getElementById('table-formulaire'); 
             const btnValider = document.getElementById('btn-valider');
             
-            // On retire l'effet de pulsation une fois les données arrivées
-            blocDetails.classList.remove('chargement-actif');
+            // Récupération des nouveaux éléments du formulaire de commentaire
+            const formCommentaire = document.getElementById('form-commentaire');
+            const inputCommNom = document.getElementById('comm-nom');
+            const inputCommMsg = document.getElementById('comm-msg');
+            const btnCommenter = formCommentaire ? formCommentaire.querySelector('button') : null;
 
+            if (blocDetails) blocDetails.classList.remove('chargement-actif');
+
+            // Si la journée n'existe pas ou si le circuit est vide = AUCUNE SORTIE
             if (!jourData || !jourData.prew || !jourData.circuit || jourData.circuit.toString().trim() === "") {
                 blocDetails.innerHTML = "<h4>Détails de la journée</h4><span class='no-sortie'>Aucune sortie officielle planifiée ce jour dans l'agenda du club.</span>";
-                formTable.style.opacity = "0.4"; 
-                if(btnValider) btnValider.disabled = true; 
-                document.getElementById('form-commentaire').style.opacity = "0.4";
+                
+                // 1. Blocage du formulaire d'inscription (Déjà en place)
+                if (formTable) formTable.style.opacity = "0.4"; 
+                if (btnValider) btnValider.disabled = true; 
+                
+                // 2. NOUVEAUTÉ : Blocage complet du formulaire de commentaire
+                if (formCommentaire) formCommentaire.style.opacity = "0.4";
+                if (inputCommNom) inputCommNom.disabled = true;
+                if (inputCommMsg) inputCommMsg.disabled = true;
+                if (btnCommenter) btnCommenter.disabled = true;
+                
             } else {
-                formTable.style.opacity = "1"; 
-                if(btnValider) btnValider.disabled = false; 
-                document.getElementById('form-commentaire').style.opacity = "1";
+                // SI LA SORTIE EXISTE : On active et on libère tout
+                if (formTable) formTable.style.opacity = "1"; 
+                if (btnValider) btnValider.disabled = false; 
+                
+                if (formCommentaire) formCommentaire.style.opacity = "1";
+                if (inputCommNom) inputCommNom.disabled = false;
+                if (inputCommMsg) inputCommMsg.disabled = false;
+                if (btnCommenter) btnCommenter.disabled = false;
                 
                 let openrunnerNettoye = jourData.openrunner ? jourData.openrunner.toString().trim() : "";
                 let openrunnerLink = "Tracé N/C";
                 if (openrunnerNettoye !== "") {
-                    // ASSEMBLAGE CORRECT AVEC LA PARTIE FIXE EXACTE DEMANDÉE :
-                    const urlComplete = openrunnerNettoye.startsWith("http") ? openrunnerNettoye : "https://www.openrunner.com/route-details/" + openrunnerNettoye;
+                    const urlComplete = openrunnerNettoye.startsWith("http") ? openrunnerNettoye : "https://openrunner.com" + openrunnerNettoye;
                     openrunnerLink = "<a href='" + urlComplete + "' target='_blank'>Tracé OpenRunner</a>";
                 }
-
-
                 
                 let kmTxt = jourData.km ? jourData.km.toString().trim() + " km" : "N/C"; 
                 let denivTxt = jourData.deniv ? jourData.deniv.toString().trim() + " m D+" : "N/C";
@@ -295,6 +311,7 @@
             filtrerCommentaires();
         }
 
+
         function filtrerInscrits() {
             const tbody = document.getElementById('liste-participants'); tbody.innerHTML = "";
             let filtres = cacheInscrits.filter(c => c.idUnique === idUniqueActif);
@@ -302,13 +319,22 @@
             filtres.forEach(c => uiLigne(c.nom, c.niveau)); uiCompteurs();
         }
 
-        function filtrerCommentaires() {
-            const container = document.getElementById('liste-commentaires'); container.innerHTML = "";
+           function filtrerCommentaires() {
+            const container = document.getElementById('liste-commentaires'); 
+            container.innerHTML = "";
             let filtres = cacheCommentaires.filter(m => m.idUnique === idUniqueActif);
-            if (filtres.length === 0) { container.innerHTML = "<p class='ligne-comm' style='color:#aaa; font-style:italic;'>Aucun échange pour le moment.</p>"; return; }
-            filtres.forEach(m => { container.innerHTML += "<p class='ligne-comm'><span class='bulle-nom'>[" + m.nom + "]</span> : " + m.message + "</p>"; });
+            if (filtres.length === 0) { 
+                container.innerHTML = "<p class='ligne-comm' style='color:#aaa; font-style:italic; font-size:13px !important;'>Aucun échange pour le moment.</p>"; 
+                return; 
+            }
+            filtres.forEach(m => { 
+                // VERROUILLAGE TECHNIQUE DE LA TAILLE PARFAITE À 13 PIXELS
+                container.innerHTML += "<p class='ligne-comm' style='font-size:13px !important; padding:4px 8px; margin:0 0 5px 0;'><span class='bulle-nom'>[" + m.nom + "]</span> : " + m.message + "</p>"; 
+            });
             container.scrollTop = container.scrollHeight;
         }
+
+
 
         function uiCompteurs() {
             const lignes = document.getElementById('liste-participants').querySelectorAll('tr');
