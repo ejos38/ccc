@@ -360,21 +360,27 @@
             document.getElementById('count-noir').innerText = "(" + n + ")";
         }
 
-        function uiLigne(nom, niveau) {
+            function uiLigne(nom, niveau) {
             const tbody = document.getElementById('liste-participants');
             const aucun = tbody.querySelector('tr');
             if (aucun && aucun.querySelector('#ligne-aucun')) aucun.remove();
             let trExistant = null;
             tbody.querySelectorAll('tr').forEach(tr => { if (tr.querySelector('.gauche').innerText.toLowerCase() === nom.toLowerCase()) trExistant = tr; });
             
+            // Styles de couleur verte pour la cellule cochée (Fond vert clair + Coche vert vif)
+            const styleVert = "style='width:16%; background-color: #e2f0d9; color: #28a745; font-weight: bold; font-size: 14px;'";
+            const styleNormal = "style='width:16%;'";
+            
             const contenu = "<td class='gauche' style='width:36%;'>" + nom + "</td>" +
-                "<td style='width:16%;'>" + (niveau === "Endurance Bleu" ? "✔️" : "") + "</td>" +
-                "<td style='width:16%;'>" + (niveau === "Endurance Rouge" ? "✔️" : "") + "</td>" +
-                "<td style='width:16%;'>" + (niveau === "Performance Rouge" ? "✔️" : "") + "</td>" +
-                "<td style='width:16%;'>" + (niveau === "Performance Noir" ? "✔️" : "") + "</td>";
+                "<td " + (niveau === "Endurance Bleu" ? styleVert : styleNormal) + ">" + (niveau === "Endurance Bleu" ? "✔️" : "") + "</td>" +
+                "<td " + (niveau === "Endurance Rouge" ? styleVert : styleNormal) + ">" + (niveau === "Endurance Rouge" ? "✔️" : "") + "</td>" +
+                "<td " + (niveau === "Performance Rouge" ? styleVert : styleNormal) + ">" + (niveau === "Performance Rouge" ? "✔️" : "") + "</td>" +
+                "<td " + (niveau === "Performance Noir" ? styleVert : styleNormal) + ">" + (niveau === "Performance Noir" ? "✔️" : "") + "</td>";
+                
             if (trExistant) { trExistant.innerHTML = contenu; } 
             else { const tr = document.createElement('tr'); tr.innerHTML = contenu; tbody.appendChild(tr); }
         }
+
 
         document.getElementById('nom').addEventListener('input', function(e) {
             document.getElementById('btn-annuler').style.display = e.target.value.trim().length > 2 ? "inline-block" : "none";
