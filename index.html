@@ -251,10 +251,10 @@
             // Génération dynamique des intercalaires du carrousel uniquement pour les parcours valides
             parcoursValides.forEach((p, idx) => {
                 let nomNiveauComplet = p.niveau;
-                if (p.niveau === "E-Bleu") nomNiveauComplet = "Endurance Bleu";
-                if (p.niveau === "E-Rouge") nomNiveauComplet = "Endurance Rouge";
-                if (p.niveau === "P-Rouge") nomNiveauComplet = "Performance Rouge";
-                if (p.niveau === "P-Noir") nomNiveauComplet = "Performance Noir";
+                if (p.niveau === "E-Bleu") nomNiveauComplet = "End. Bleu";
+                if (p.niveau === "E-Rouge") nomNiveauComplet = "End. Rouge";
+                if (p.niveau === "P-Rouge") nomNiveauComplet = "Perf. Rouge";
+                if (p.niveau === "P-Noir") nomNiveauComplet = "Perf. Noir";
 
                 const badge = document.createElement('div');
                 badge.className = "badge-niveau";
