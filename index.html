@@ -40,6 +40,19 @@
         .th-erouge { background-color: #eb8bbd !important; color: #ffffff !important; }
         .th-prouge { background-color: #ee4545 !important; color: #ffffff !important; }
         .th-noir { background-color: #434343 !important; color: #ffffff !important; }
+
+        /* CACHER PROVISOIREMENT LES BOUTONS RADIOS ET LES TITRES DE NIVEAUX */
+        #table-formulaire th:not(:first-child), 
+        #table-formulaire td:not(:first-child) { 
+            display: none !important; 
+        }
+        
+        /* Forcer la case de saisie du nom à prendre 100% de la largeur du tableau */
+        #table-formulaire { width: 100% !important; table-layout: fixed; }
+        #table-formulaire th:first-child { width: 100% !important; text-align: left; }
+        #table-formulaire td:first-child { width: 100% !important; text-align: left; }
+
+
         
         .zone-ascenseur { width: 100%; margin-top: 0px; }
         .table-corps-participants { width: 100%; border-collapse: collapse; table-layout: fixed; }
