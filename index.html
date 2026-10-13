@@ -11,18 +11,28 @@
         .onglet { background: #f1f3f5; color: #495057; border: 1px solid #ced4da; padding: 8px 12px; font-weight: bold; font-size: 12px; border-radius: 4px; cursor: pointer; }
         .onglet.actif { background: #007BFF; color: white; border-color: #007BFF; }
         
-        /* Cadrage parfait du logo en bout de ligne à droite */
+        /* Structure verticale du carrousel */
+        .bloc-affichage-carrousel { display: flex; flex-direction: column; flex: 1; }
+        .barre-niveaux-carrousel { display: flex; gap: 5px; margin-bottom: 0px; flex-wrap: wrap; }
+        
+        /* Style des intercalaires du carrousel */
+        .badge-niveau { padding: 5px 12px; font-size: 11px; font-weight: bold; border-radius: 4px 4px 0 0; border: 1px solid #ccc; border-bottom: none; cursor: pointer; background: #e9ecef; color: #495057; transition: all 0.2s; }
+        .badge-bleu.actif { background: #5b95f9 !important; color: white !important; border-color: #5b95f9 !important; }
+        .badge-erouge.actif { background: #eb8bbd !important; color: white !important; border-color: #eb8bbd !important; }
+        .badge-prouge.actif { background: #ee4545 !important; color: white !important; border-color: #ee4545 !important; }
+        .badge-noir.actif { background: #434343 !important; color: white !important; border-color: #434343 !important; }
+        
+        /* Cadrage parfait du logo et de la boîte de détails */
         .conteneur-details-logo { display: flex; justify-content: space-between; align-items: stretch; gap: 15px; width: 100%; }
-        .box-details { flex: 1; background: #f8f9fa; border-left: 4px solid #007BFF; padding: 12px; font-size: 13.5px; border-radius: 0 4px 4px 0; line-height: 1.6; }
+        .box-details { flex: 1; background: #f8f9fa; border-left: 4px solid #007BFF; padding: 12px; font-size: 13.5px; border-radius: 0 4px 4px 4px; line-height: 1.6; }
         .box-details h4 { margin: 0 0 5px 0; color: #007BFF; font-size: 15px; }
-        .logo-club { width: 85px; height: 85px; border-radius: 50%; object-fit: cover; align-self: center; }
+        .logo-club { width: 85px; height: 85px; border-radius: 50%; object-fit: cover; align-self: flex-end; margin-bottom: 2px; }
         
         .consigne-inscription { font-size: 13px; color: #555; font-style: italic; margin: 5px 0 5px 0; display: block; }
         table { width: 100%; border-collapse: collapse; }
         th, td { border: 1px solid #ccc; padding: 6px; text-align: center; font-size: 13px; }
         th { background: #e9ecef; }
         
-        /* En-tête des participants fixe */
         .table-participants { width: 100%; border-collapse: collapse; margin-top: 15px; table-layout: fixed; }
         .table-participants th { padding: 10px 4px; font-size: 12px; font-weight: bold; }
         .th-nom { background-color: #b7e1cd !important; color: #000000 !important; }
@@ -31,13 +41,7 @@
         .th-prouge { background-color: #ee4545 !important; color: #ffffff !important; }
         .th-noir { background-color: #434343 !important; color: #ffffff !important; }
         
-        /* Liste des inscrits */
-        .zone-ascenseur { 
-            width: 100%;
-            margin-top: 0px;
-        }
-
-
+        .zone-ascenseur { width: 100%; margin-top: 0px; }
         .table-corps-participants { width: 100%; border-collapse: collapse; table-layout: fixed; }
         .table-corps-participants td { padding: 8px; border: 1px solid #ccc; text-align: center; font-size: 13px; }
         
@@ -47,65 +51,18 @@
         .nb { display: block; font-weight: bold; font-size: 11px; margin-top: 4px; color: inherit; }
         .no-sortie { color: #dc3545; font-style: italic; }
         
-         /* Styles pour le formulaire de commentaire sur une seule ligne */
-      
-         .zone-ascenseur-comm { 
-            border: 1px solid #ced4da; 
-            background-color: #f0f4f8; 
-            padding: 10px; 
-            border-radius: 6px; 
-            margin-bottom: 12px; 
-            margin-top: 10px;
-        }
-
-        .titre-section-comm { font-size: 14px; font-weight: bold; margin: 4px 0 8px 0; color: #495057; display: flex; align-items: center; }
-        
-/	* 2. Transformation des messages en véritables bulles de texte blanches et détachées */
-                 /* 2. Bulles de texte blanches avec écriture ultra-compacte */
-        .ligne-comm { 
-            font-size: 13.5px !important; /* Réduit la taille à 11.5px */
-            padding: 3px 6px; /* Serre l'espace intérieur au maximum */
-            background: #ffffff; 
-            border: 1px solid #e1e8ed; 
-            border-radius: 4px; 
-            margin: 0 0 4px 0; /* Rapproche les bulles les unes des autres */
-            text-align: left; 
-            line-height: 1.25; /* Serre les lignes pour un gain de place maximal */
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04); 
-        }
-
-
-
-        
-	/* Couleur spécifique pour le nom de l'auteur dans la bulle */
-        .bulle-nom { 
-            color: #0056b3; /* Bleu soutenu pour le nom de l'adhérent */
-            font-weight: bold; 
-        }
-        
-        /* Le conteneur redevient horizontal avec un alignement sur une seule ligne */
+        /* Zone Commentaires */
+        .zone-ascenseur-comm { border: 1px solid #ced4da; background-color: #f0f4f8; padding: 10px; border-radius: 6px; margin-bottom: 12px; margin-top: 10px; }
+        .titre-section-comm { font-size: 14px; font-weight: bold; margin: 4px 0 8px 0 !important; color: #495057; display: flex; align-items: center; }
+        .pastille-jaune { width: 12px; height: 12px; background-color: #FFD700; border-radius: 50%; display: inline-block; margin-right: 8px; box-shadow: 0 0 4px rgba(255, 215, 0, 0.5); }
+        .ligne-comm { background: #ffffff; border: 1px solid #e1e8ed; border-radius: 5px; margin: 0 0 5px 0; text-align: left; line-height: 1.3; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); }
+        .bulle-nom { color: #0056b3; font-weight: bold; }
         .form-comm-horizontal { display: flex; flex-direction: row; gap: 10px; width: 100%; margin-bottom: 8px; }
-        
-        /* Répartition stricte de la largeur de la ligne */
         .input-comm-nom { width: 25%; padding: 6px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; box-sizing: border-box; }
         .input-comm-msg { width: 75%; padding: 6px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; box-sizing: border-box; }
-        
-        /* Le bouton reste en dessous aligné à droite */
-	/* 3. Bouton "Envoyer" relooké en un beau vert de club de cyclisme */
-        /* Zone pour caler le bouton envoyer seul sur sa ligne en dessous et forcer l'alignement à droite */
-        .zone-bouton-comm { 
-            display: flex !important; 
-            justify-content: flex-end !important; /* Pousse le bouton tout en bout de ligne à droite */
-            width: 100%; 
-            margin-bottom: 4px !important; 
-        }
-		/* Petit effet de survol pour rendre le bouton interactif */
-       	 .zone-bouton-comm button:hover {
-            background-color: #218838 !important; /* Vert un peu plus foncé quand on passe la souris */
-        }
-
-
-        /* Effet de pulsation de chargement corrigé et sécurisé */
+        .zone-bouton-comm { display: flex !important; justify-content: flex-end !important; width: 100%; margin-bottom: 4px !important; }
+        .zone-bouton-comm button { background-color: #28a745 !important; color: white !important; font-weight: bold; border: none; padding: 7px 14px; border-radius: 4px; cursor: pointer; }
+        .zone-bouton-comm button:hover { background-color: #218838 !important; }
         .box-details.chargement-actif { animation: pulse 1.5s infinite ease-in-out; color: #666; }
         @keyframes pulse { 0% { opacity: 0.6; } 50% { opacity: 1; } 100% { opacity: 0.6; } }
     </style>
@@ -114,13 +71,16 @@
     <div class="zone-entete">
         <div id="barre-onglets" class="zone-onglets"></div>
         <div class="conteneur-details-logo">
-            <div id="bloc-details-parcours" class="box-details chargement-actif">⏳ Connexion sécurisée au serveur du club en cours...</div>
+            <div class="bloc-affichage-carrousel">
+                <!-- Zone où se dessinent les onglets du carrousel de niveau -->
+                <div id="carrousel-boutons" class="barre-niveaux-carrousel"></div>
+                <div id="bloc-details-parcours" class="box-details chargement-actif">⏳ Connexion sécurisée au serveur du club en cours...</div>
+            </div>
             <img src="icone_CCC.jpg" alt="Logo CCC" class="logo-club">
         </div>
         <p class="consigne-inscription">Veuillez vous inscrire sur un des niveaux en saisissant votre nom complet.</p>
     </div>
 
-    <!-- Restauration propre de la balise du formulaire d'inscription -->
     <form id="form-inscription">
         <table id="table-formulaire" style="margin-bottom: 15px;">
             <thead>
@@ -168,10 +128,8 @@
         </table>
     </div>
 
-    <!-- SÉPARATEUR PHYSIQUE FORCE : Crée un espace réel de 25 pixels qui ne peut pas être annulé -->
     <div style="height: 25px; clear: both;"></div>
 
-          <!-- Formulaire de commentaire aligné sur une seule ligne (25% / 75%) -->
     <form id="form-commentaire" class="form-comm-horizontal">
         <input type="text" id="comm-nom" class="input-comm-nom" required placeholder="Votre Nom">
         <input type="text" id="comm-msg" class="input-comm-msg" required placeholder="Écrivez un commentaire public...">
@@ -180,39 +138,35 @@
         <button type="submit" form="form-commentaire">Envoyer mon commentaire</button>
     </div>
 
-
-
-        <!-- Titre mis à jour avec la pastille jaune et l'icône de bulle -->
     <div class="titre-section-comm">
         <span class="pastille-jaune"></span> 💬 Échanges & Commentaires
     </div>
-
     <div class="zone-ascenseur-comm" id="liste-commentaires">
-        <p class="ligne-comm" style="color:#aaa; font-style:italic;">Aucun échange pour le moment.</p>
+        <p class="ligne-comm" style="color:#aaa; font-style:italic; font-size:13px !important; padding:4px 8px;">Aucun échange pour le moment.</p>
     </div>
-    
-   
     <script>
         const API_URL = "https://script.google.com/macros/s/AKfycbzVreBXDKZ__mtZvnQrxz6tsOCrb4wX2_-rUpLWAUuxakv7Pli1hGlWAFAMVC16M4BoPg/exec";
         
-        let cacheInscrits = new Array();
+       let cacheInscrits = new Array();
         let cacheCommentaires = new Array();
         let cacheJoursSemaine = new Array();
         let idUniqueActif = "";
 
-        function formaterDateOption(d) {
-    if (!d) return "";
-    const p = d.split('/');
-    if (p.length !== 3) return d;
-    
-    // VERROUILLAGE DES INDICES : p[0]=Jour, p[1]=Mois, p[2]=Année
-    const jour = parseInt(p[0], 10);
-    const mois = parseInt(p[1], 10) - 1; // En JavaScript, les mois commencent à 0 (0=Janvier, 9=Octobre)
-    const annee = parseInt(p[2], 10);
-    
-    const dateObj = new Date(annee, mois, jour);
-    return dateObj.toLocaleDateString('fr-FR', { weekday: 'short', day: 'numeric', month: 'short' });
-}
+                function formaterDateOption(d) {
+            if (!d) return "";
+            var p = d.split('/');
+            if (p.length !== 3) return d;
+            
+            // VERROUILLAGE TECHNIQUE DE L'ORDRE DES MORCEAUX (0=Jour, 1=Mois, 2=Année)
+            var jour = parseInt(p[0], 10);
+            var mois = parseInt(p[1], 10) - 1; // En JavaScript, les mois commencent à 0 (0=Janvier)
+            var annee = parseInt(p[2], 10);
+            
+            var dateObj = new Date(annee, mois, jour);
+            return dateObj.toLocaleDateString('fr-FR', { weekday: 'short', day: 'numeric', month: 'short' });
+        }
+
+
 
 
         async function chargerDonnees() {
@@ -261,59 +215,86 @@
                 function afficherDetailsEtInscrits() {
             const jourData = cacheJoursSemaine.find(j => j.idUnique === idUniqueActif);
             const blocDetails = document.getElementById('bloc-details-parcours');
+            const barreBoutons = document.getElementById('carrousel-boutons');
             const formTable = document.getElementById('table-formulaire'); 
             const btnValider = document.getElementById('btn-valider');
-            
-            // Récupération des nouveaux éléments du formulaire de commentaire
             const formCommentaire = document.getElementById('form-commentaire');
             const inputCommNom = document.getElementById('comm-nom');
             const inputCommMsg = document.getElementById('comm-msg');
             const btnCommenter = formCommentaire ? formCommentaire.querySelector('button') : null;
 
             if (blocDetails) blocDetails.classList.remove('chargement-actif');
+            if (barreBoutons) barreBoutons.innerHTML = ""; 
 
-            // Si la journée n'existe pas ou si le circuit est vide = AUCUNE SORTIE
-            if (!jourData || !jourData.prew || !jourData.circuit || jourData.circuit.toString().trim() === "") {
+            // Sécurité : on filtre les parcours pour éliminer les lignes de l'agenda qui seraient totalement vides
+            let parcoursValides = new Array();
+            if (jourData && jourData.aDesSorties && jourData.parcours.length > 0) {
+                parcoursValides = jourData.parcours.filter(p => p.circuit && p.circuit.toString().trim() !== "");
+            }
+
+            // CORRECTION : S'il n'y a aucune sortie OU si toutes les sorties trouvées ont un circuit vide (comme le 15/10)
+            if (!jourData || parcoursValides.length === 0) {
                 blocDetails.innerHTML = "<h4>Détails de la journée</h4><span class='no-sortie'>Aucune sortie officielle planifiée ce jour dans l'agenda du club.</span>";
-                
-                // 1. Blocage du formulaire d'inscription (Déjà en place)
                 if (formTable) formTable.style.opacity = "0.4"; 
                 if (btnValider) btnValider.disabled = true; 
-                
-                // 2. NOUVEAUTÉ : Blocage complet du formulaire de commentaire
                 if (formCommentaire) formCommentaire.style.opacity = "0.4";
-                if (inputCommNom) inputCommNom.disabled = true;
-                if (inputCommMsg) inputCommMsg.disabled = true;
-                if (btnCommenter) btnCommenter.disabled = true;
-                
-            } else {
-                // SI LA SORTIE EXISTE : On active et on libère tout
-                if (formTable) formTable.style.opacity = "1"; 
-                if (btnValider) btnValider.disabled = false; 
-                
-                if (formCommentaire) formCommentaire.style.opacity = "1";
-                if (inputCommNom) inputCommNom.disabled = false;
-                if (inputCommMsg) inputCommMsg.disabled = false;
-                if (btnCommenter) btnCommenter.disabled = false;
-                
-                let openrunnerNettoye = jourData.openrunner ? jourData.openrunner.toString().trim() : "";
-                let openrunnerLink = "Tracé N/C";
-                if (openrunnerNettoye !== "") {
-                    const urlComplete = openrunnerNettoye.startsWith("http") ? openrunnerNettoye : "https://www.openrunner.com/route-details/" + openrunnerNettoye;
-                    openrunnerLink = "<a href='" + urlComplete + "' target='_blank'>Tracé OpenRunner</a>";
-                }
-                
-                let kmTxt = jourData.km ? jourData.km.toString().trim() + " km" : "N/C"; 
-                let denivTxt = jourData.deniv ? jourData.deniv.toString().trim() + " m D+" : "N/C";
-                
-                blocDetails.innerHTML = 
-                    "<strong>Départ :</strong> " + (jourData.depart || "N/C") + " &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>Pilote :</strong> " + (jourData.pilote || "Non désigné") + "<br>" + 
-                    "<strong>Circuit :</strong> " + openrunnerLink + " (" + kmTxt + " / " + denivTxt + ") &nbsp;•&nbsp; " + jourData.circuit;
+                if (inputCommNom) inputCommNom.disabled = true; if (inputCommMsg) inputCommMsg.disabled = true; if (btnCommenter) btnCommenter.disabled = true;
+                filtrerInscrits(); filtrerCommentaires();
+                return;
             }
+
+            // SI DES SORTIES VALIDES EXISTENT : On libère les formulaires d'écriture
+            if (formTable) formTable.style.opacity = "1"; if (btnValider) btnValider.disabled = false; 
+            if (formCommentaire) formCommentaire.style.opacity = "1";
+            if (inputCommNom) inputCommNom.disabled = false; if (inputCommMsg) inputCommMsg.disabled = false; if (btnCommenter) btnCommenter.disabled = false;
+
+            // Génération dynamique des intercalaires du carrousel uniquement pour les parcours valides
+            parcoursValides.forEach((p, idx) => {
+                let nomNiveauComplet = p.niveau;
+                if (p.niveau === "E-Bleu") nomNiveauComplet = "Endurance Bleu";
+                if (p.niveau === "E-Rouge") nomNiveauComplet = "Endurance Rouge";
+                if (p.niveau === "P-Rouge") nomNiveauComplet = "Performance Rouge";
+                if (p.niveau === "P-Noir") nomNiveauComplet = "Performance Noir";
+
+                const badge = document.createElement('div');
+                badge.className = "badge-niveau";
+                badge.innerText = nomNiveauComplet;
+                
+                if (p.niveau === "E-Bleu" || p.niveau === "Endurance Bleu") badge.classList.add("badge-bleu");
+                if (p.niveau === "E-Rouge" || p.niveau === "Endurance Rouge") badge.classList.add("badge-erouge");
+                if (p.niveau === "P-Rouge" || p.niveau === "Performance Rouge") badge.classList.add("badge-prouge");
+                if (p.niveau === "P-Noir" || p.niveau === "Performance Noir") badge.classList.add("badge-noir");
+                
+                badge.onclick = function() {
+                    document.querySelectorAll('.badge-niveau').forEach(b => b.classList.remove('actif'));
+                    badge.classList.add('actif');
+                    
+                    let openrunnerNettoye = p.openrunner ? p.openrunner.toString().trim() : "";
+                    let openrunnerLink = "Tracé N/C";
+                    if (openrunnerNettoye !== "") {
+                        const urlComplete = openrunnerNettoye.startsWith("http") ? openrunnerNettoye : "https://openrunner.com/route-details/" + openrunnerNettoye;
+                        openrunnerLink = "<a href='" + urlComplete + "' target='_blank'>Tracé OpenRunner</a>";
+                    }
+                    let kmTxt = p.km ? p.km.toString().trim() + " km" : "N/C"; 
+                    let denivTxt = p.deniv ? p.deniv.toString().trim() + " m D+" : "N/C";
+                    
+                    // CORRECTION : Affichage direct des informations sans le titre du niveau
+                    blocDetails.innerHTML = 
+                        "<strong>Départ :</strong> " + (p.depart || "N/C") + " &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>Pilote :</strong> " + (p.pilote || "Non désigné") + "<br>" + 
+                        "<strong>Circuit :</strong> " + openrunnerLink + " (" + kmTxt + " / " + denivTxt + ") &nbsp;•&nbsp; " + p.circuit;
+                        
+                    const radioBouton = document.querySelector('input[name="niveau"][value="' + nomNiveauComplet + '"]');
+                    if (radioBouton) radioBouton.checked = true;
+                };
+
+                
+                barreBoutons.appendChild(badge);
+                if (idx === 0) { badge.click(); }
+            });
+
             filtrerInscrits(); 
             filtrerCommentaires();
         }
-
 
         function filtrerInscrits() {
             const tbody = document.getElementById('liste-participants'); tbody.innerHTML = "";
@@ -322,22 +303,19 @@
             filtres.forEach(c => uiLigne(c.nom, c.niveau)); uiCompteurs();
         }
 
-           function filtrerCommentaires() {
+        function filtrerCommentaires() {
             const container = document.getElementById('liste-commentaires'); 
             container.innerHTML = "";
             let filtres = cacheCommentaires.filter(m => m.idUnique === idUniqueActif);
             if (filtres.length === 0) { 
-                container.innerHTML = "<p class='ligne-comm' style='color:#aaa; font-style:italic; font-size:13px !important;'>Aucun échange pour le moment.</p>"; 
+                container.innerHTML = "<p class='ligne-comm' style='color:#aaa; font-style:italic; font-size:13px !important; padding:4px 8px;'>Aucun échange pour le moment.</p>"; 
                 return; 
             }
             filtres.forEach(m => { 
-                // VERROUILLAGE TECHNIQUE DE LA TAILLE PARFAITE À 13 PIXELS
                 container.innerHTML += "<p class='ligne-comm' style='font-size:13px !important; padding:4px 8px; margin:0 0 5px 0;'><span class='bulle-nom'>[" + m.nom + "]</span> : " + m.message + "</p>"; 
             });
-            
+            container.scrollTop = container.scrollHeight;
         }
-
-
 
         function uiCompteurs() {
             const lignes = document.getElementById('liste-participants').querySelectorAll('tr');
@@ -347,10 +325,10 @@
                 const tds = tr.querySelectorAll('td');
                 if (tds.length >= 5) {
                     t++;
-                    if (tds[1].innerText === "✔️") b++; 
-                    if (tds[2].innerText === "✔️") er++; 
-                    if (tds[3].innerText === "✔️") pr++; 
-                    if (tds[4].innerText === "✔️") n++;
+                    if (tds.innerText === "✔️") b++; 
+                    if (tds.innerText === "✔️") er++; 
+                    if (tds.innerText === "✔️") pr++; 
+                    if (tds.innerText === "✔️") n++;
                 }
             });
             document.getElementById('total-general').innerText = t; 
@@ -360,14 +338,13 @@
             document.getElementById('count-noir').innerText = "(" + n + ")";
         }
 
-            function uiLigne(nom, niveau) {
+        function uiLigne(nom, niveau) {
             const tbody = document.getElementById('liste-participants');
             const aucun = tbody.querySelector('tr');
             if (aucun && aucun.querySelector('#ligne-aucun')) aucun.remove();
             let trExistant = null;
             tbody.querySelectorAll('tr').forEach(tr => { if (tr.querySelector('.gauche').innerText.toLowerCase() === nom.toLowerCase()) trExistant = tr; });
             
-            // Styles de couleur verte pour la cellule cochée (Fond vert clair + Coche vert vif)
             const styleVert = "style='width:16%; background-color: #e2f0d9; color: #28a745; font-weight: bold; font-size: 14px;'";
             const styleNormal = "style='width:16%;'";
             
@@ -376,11 +353,9 @@
                 "<td " + (niveau === "Endurance Rouge" ? styleVert : styleNormal) + ">" + (niveau === "Endurance Rouge" ? "✔️" : "") + "</td>" +
                 "<td " + (niveau === "Performance Rouge" ? styleVert : styleNormal) + ">" + (niveau === "Performance Rouge" ? "✔️" : "") + "</td>" +
                 "<td " + (niveau === "Performance Noir" ? styleVert : styleNormal) + ">" + (niveau === "Performance Noir" ? "✔️" : "") + "</td>";
-                
             if (trExistant) { trExistant.innerHTML = contenu; } 
             else { const tr = document.createElement('tr'); tr.innerHTML = contenu; tbody.appendChild(tr); }
         }
-
 
         document.getElementById('nom').addEventListener('input', function(e) {
             document.getElementById('btn-annuler').style.display = e.target.value.trim().length > 2 ? "inline-block" : "none";
@@ -392,27 +367,18 @@
             cacheInscrits.push({ nom: nom, niveau: rad.value, idUnique: idUniqueActif }); uiCompteurs();
             document.getElementById('comm-nom').value = nom; document.getElementById('nom').value = ""; document.getElementById('btn-annuler').style.display = "none";
             fetch(API_URL, { method: 'POST', body: JSON.stringify({ action: "inscrire", nom: nom, niveau: rad.value, idUnique: idUniqueActif }) }); rad.checked = false;
-           
         });
 
         document.getElementById('btn-annuler').addEventListener('click', function() {
             const nom = document.getElementById('nom').value.trim(); if(!nom || !idUniqueActif || !confirm("Annuler l'inscription de " + nom + " ?")) return;
-                        cacheInscrits = cacheInscrits.filter(c => !(c.nom.toLowerCase() === nom.toLowerCase() && c.idUnique === idUniqueActif));
-            filtrerInscrits(); 
-            document.getElementById('nom').value = ""; 
-            document.getElementById('btn-annuler').style.display = "none";
+            cacheInscrits = cacheInscrits.filter(c => !(c.nom.toLowerCase() === nom.toLowerCase() && c.idUnique === idUniqueActif));
+            filtrerInscrits(); document.getElementById('nom').value = ""; document.getElementById('btn-annuler').style.display = "none";
             fetch(API_URL, { method: 'POST', body: JSON.stringify({ action: "annuler", nom: nom, idUnique: idUniqueActif }) });
         });
 
         document.getElementById('form-commentaire').addEventListener('submit', function(e) {
-            e.preventDefault(); 
-            const cNom = document.getElementById('comm-nom').value.trim(); 
-            const cMsg = document.getElementById('comm-msg').value.trim(); 
-            if (!cNom || !cMsg || !idUniqueActif) return;
-            
-            cacheCommentaires.push({ nom: cNom, message: cMsg, idUnique: idUniqueActif }); 
-            filtrerCommentaires(); 
-            document.getElementById('comm-msg').value = "";
+            e.preventDefault(); const cNom = document.getElementById('comm-nom').value.trim(); const cMsg = document.getElementById('comm-msg').value.trim(); if (!cNom || !cMsg || !idUniqueActif) return;
+            cacheCommentaires.push({ nom: cNom, message: cMsg, idUnique: idUniqueActif }); filtrerCommentaires(); document.getElementById('comm-msg').value = "";
             fetch(API_URL, { method: 'POST', body: JSON.stringify({ action: "commenter", nom: cNom, message: cMsg, idUnique: idUniqueActif }) });
         });
 
