@@ -26,8 +26,18 @@
         
         /* Cadrage parfait du logo et de la boîte de détails */
         .conteneur-details-logo { display: flex; justify-content: space-between; align-items: stretch; gap: 15px; width: 100%; }
-        .box-details { flex: 1; background: #f8f9fa; border-left: 4px solid #007BFF; padding: 12px; font-size: 13.5px; border-radius: 0 4px 4px 4px; line-height: 1.6; }
+       
+        /* La boîte de détails de base */
+        .box-details { flex: 1; background: #f8f9fa; border-left: 4px solid #007BFF; padding: 12px; font-size: 13.5px; border-radius: 0 4px 4px 4px; line-height: 1.6; transition: all 0.25s ease; }
         .box-details h4 { margin: 0 0 5px 0; color: #007BFF; font-size: 15px; }
+
+        /* NOUVEAUTÉ : Les 4 déclinaisons de fonds pastels et de bordures associées */
+        .box-details.fond-bleu { background-color: #f0f4ff !important; border-left-color: #5b95f9 !important; }
+        .box-details.fond-erouge { background-color: #fff0f6 !important; border-left-color: #eb8bbd !important; }
+        .box-details.fond-prouge { background-color: #fff5f5 !important; border-left-color: #ee4545 !important; }
+        .box-details.fond-noir { background-color: #f1f3f5 !important; border-left-color: #434343 !important; }
+
+
         .logo-club { width: 85px; height: 85px; border-radius: 50%; object-fit: cover; align-self: flex-end; margin-bottom: 2px; }
         
         .consigne-inscription { font-size: 13px; color: #555; font-style: italic; margin: 5px 0 5px 0; display: block; }
@@ -281,20 +291,27 @@
                 if (p.niveau === "P-Rouge" || p.niveau === "Performance Rouge") badge.classList.add("badge-prouge");
                 if (p.niveau === "P-Noir" || p.niveau === "Performance Noir") badge.classList.add("badge-noir");
                 
-                badge.onclick = function() {
+                               badge.onclick = function() {
                     document.querySelectorAll('.badge-niveau').forEach(b => b.classList.remove('actif'));
                     badge.classList.add('actif');
+                    
+                    // NETTOYAGE ET APPLICATION DU FOND PASTEL DYNAMIQUE
+                    blocDetails.classList.remove('fond-bleu', 'fond-erouge', 'fond-prouge', 'fond-noir');
+                    if (p.niveau === "E-Bleu") blocDetails.classList.add('fond-bleu');
+                    if (p.niveau === "E-Rouge") blocDetails.classList.add('fond-erouge');
+                    if (p.niveau === "P-Rouge") blocDetails.classList.add('fond-prouge');
+                    if (p.niveau === "P-Noir") blocDetails.classList.add('fond-noir');
                     
                     let openrunnerNettoye = p.openrunner ? p.openrunner.toString().trim() : "";
                     let openrunnerLink = "Tracé N/C";
                     if (openrunnerNettoye !== "") {
-                        const urlComplete = openrunnerNettoye.startsWith("http") ? openrunnerNettoye : "https://openrunner.com/route-details/" + openrunnerNettoye;
+                        // ADRESSE FIXE OFFICIELLE INTÉGRALE ET SÉCURISÉE
+                        const urlComplete = openrunnerNettoye.startsWith("http") ? openrunnerNettoye : "https://openrunner.com" + openrunnerNettoye;
                         openrunnerLink = "<a href='" + urlComplete + "' target='_blank'>Tracé OpenRunner</a>";
                     }
                     let kmTxt = p.km ? p.km.toString().trim() + " km" : "N/C"; 
                     let denivTxt = p.deniv ? p.deniv.toString().trim() + " m D+" : "N/C";
                     
-                    // CORRECTION : Affichage direct des informations sans le titre du niveau
                     blocDetails.innerHTML = 
                         "<strong>Départ :</strong> " + (p.depart || "N/C") + " &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>Pilote :</strong> " + (p.pilote || "Non désigné") + "<br>" + 
                         "<strong>Circuit :</strong> " + openrunnerLink + " (" + kmTxt + " / " + denivTxt + ") &nbsp;•&nbsp; " + p.circuit;
