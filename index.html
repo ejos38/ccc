@@ -11,8 +11,21 @@
         .onglet { background: #f1f3f5; color: #495057; border: 1px solid #ced4da; padding: 8px 12px; font-weight: bold; font-size: 12px; border-radius: 4px; cursor: pointer; }
         .onglet.actif { background: #007BFF; color: white; border-color: #007BFF; }
         
-        .bloc-affichage-carrousel { display: flex; flex-direction: column; flex: 1; }
-        .barre-niveaux-carrousel { display: flex; gap: 5px; margin-bottom: 0px; flex-wrap: wrap; }
+	/* FORCE ce bloc à s'étirer au maximum pour occuper tout l'espace de gauche */
+        .bloc-affichage-carrousel { 
+            display: flex; 
+            flex-direction: column; 
+            flex: 1 !important; /* Prend tout le reste de la largeur disponible */
+            min-width: 0; /* Sécurité anti-débordement pour le navigateur */
+        }
+         /* Verrouillage de la barre pour aligner horizontalement les 4 badges */
+        .barre-niveaux-carrousel { 
+            display: flex; 
+            gap: 5px; 
+            margin-bottom: 0px; 
+            flex-wrap: nowrap !important; /* Interdit formellement le saut à la ligne */
+        }
+
         .badge-niveau { padding: 5px 12px; font-size: 11px; font-weight: bold; border-radius: 4px 4px 0 0; border: 1px solid #ccc; border-bottom: none; cursor: pointer; background: #e9ecef; color: #495057; transition: all 0.2s; }
         
         /* Alignement direct des styles sur vos codes officiels de l'agenda */
@@ -21,7 +34,15 @@
         .badge-niveau.P-Rouge.actif { background: #ee4545 !important; color: white !important; border-color: #ee4545 !important; }
         .badge-niveau.P-Noir.actif { background: #434343 !important; color: white !important; border-color: #434343 !important; }
         
-        .conteneur-details-logo { display: flex; justify-content: space-between; align-items: stretch; gap: 15px; width: 100%; }
+         /* Maintien strict du face-à-face horizontal entre le bloc et le logo */
+        .conteneur-details-logo { 
+            display: flex; 
+            flex-direction: row !important; /* Force le maintien côte à côte */
+            justify-content: space-between;
+            align-items: flex-end; /* Aligne le bas du logo avec le bas de la boîte */
+            gap: 12px; 
+            width: 100%; 
+        }
         .box-details { flex: 1; background: #f8f9fa; border-left: 4px solid #007BFF; padding: 12px; font-size: 13.5px; border-radius: 0 4px 4px 4px; line-height: 1.6; transition: all 0.2s; }
         
         /* Alignement direct des fonds pastels sur vos codes officiels de l'agenda */
@@ -29,8 +50,16 @@
         .box-details.fond-E-Rouge { background-color: #fff0f6 !important; border-left-color: #eb8bbd !important; }
         .box-details.fond-P-Rouge { background-color: #fff5f5 !important; border-left-color: #ee4545 !important; }
         .box-details.fond-P-Noir { background-color: #f1f3f5 !important; border-left-color: #434343 !important; }
-        .logo-club { width: 85px; height: 85px; border-radius: 50%; object-fit: cover; align-self: flex-end; margin-bottom: 2px; }
-        
+ 	
+	/* Verrouillage strict de la largeur du logo pour qu'il ne pousse plus son voisin */
+        .logo-club { 
+            width: 80px !important; 
+            height: 80px !important; 
+            flex-shrink: 0 !important; /* Interdit à l'ordinateur de redimensionner le logo */
+            border-radius: 50%; 
+            object-fit: cover; 
+            margin-bottom: 2px; 
+        }
         .consigne-inscription { font-size: 13px; color: #555; font-style: italic; margin: 2px 0 2px 0 !important; padding: 0 !important; display: block; }
         table { width: 100%; border-collapse: collapse; }
         th, td { border: 1px solid #ccc; padding: 6px; text-align: center; font-size: 13px; }
