@@ -91,9 +91,21 @@
         .th-prouge { background-color: #ee4545 !important; color: #ffffff !important; }
         .th-noir { background-color: #434343 !important; color: #ffffff !important; }
         
-        .table-corps-participants { width: 100%; border-collapse: collapse; table-layout: fixed; }
+       .table-participants { 
+            width: 100%; 
+            border-collapse: collapse; 
+            table-layout: fixed; 
+        }
+        .table-participants td { 
+            padding: 8px; 
+            border: 1px solid #ccc; 
+            text-align: center; 
+            font-size: 13px; 
+        }
 
-        .table-corps-participants td { padding: 8px; border: 1px solid #ccc; text-align: center; font-size: 13px; }
+
+
+
         .gauche { text-align: left !important; font-weight: bold; }
         .btn-danger { background: #DC3545; display: none; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; margin-left: 15px; }
         button { background: #007BFF; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; }
@@ -155,23 +167,24 @@
     </form>
 
     <!-- LIBELLÉS EN DUR MODIFIABLES EN DIRECT ICI -->
-    <table class="table-participants">
-        <thead>
-            <tr>
-                <th class="th-nom" style="width: 36%; text-align: left;">Nom Prénom (<span id="total-general">0</span>)</th>
-                <th class="th-bleu" style="width: 16%;">End. Bleu <span class="nb" id="count-bleu">(0)</span></th>
-                <th class="th-erouge" style="width: 16%;">End. Rouge <span class="nb" id="count-erouge">(0)</span></th>
-                <th class="th-prouge" style="width: 16%;">Perf. Rouge <span class="nb" id="count-prouge">(0)</span></th>
-                <th class="th-noir" style="width: 16%;">Perf. Noir <span class="nb" id="count-noir">(0)</span></th>
-            </tr>
-        </thead>
-    </table>
-    
-    <div class="zone-ascenseur">
-        <table class="table-corps-participants">
-            <tbody id="liste-participants"></tbody>
+        <!-- TABLEAU UNIQUE SÉCURISÉ CONTRE LES DÉCALAGES SUR MAC -->
+    <div class="zone-ascenseur" style="margin-top: 15px;">
+        <table class="table-participants" style="table-layout: fixed; width: 100%;">
+            <thead>
+                <tr>
+                    <th class="th-nom" style="width: 36%; text-align: left; padding: 10px 4px; font-size: 12px; font-weight: bold;">Nom Prénom (<span id="total-general">0</span>)</th>
+                    <th class="th-bleu" style="width: 16%; padding: 10px 4px; font-size: 12px; font-weight: bold;">E-Bleu <span class="nb" id="count-bleu">(0)</span></th>
+                    <th class="th-erouge" style="width: 16%; padding: 10px 4px; font-size: 12px; font-weight: bold;">E-Rouge <span class="nb" id="count-erouge">(0)</span></th>
+                    <th class="th-prouge" style="width: 16%; padding: 10px 4px; font-size: 12px; font-weight: bold;">P-Rouge <span class="nb" id="count-prouge">(0)</span></th>
+                    <th class="th-noir" style="width: 16%; padding: 10px 4px; font-size: 12px; font-weight: bold;">P-Noir <span class="nb" id="count-noir">(0)</span></th>
+                </tr>
+            </thead>
+            <tbody id="liste-participants">
+                <!-- Les lignes de José, Freddy, etc. vont se dessiner ici -->
+            </tbody>
         </table>
     </div>
+
 
     <div style="height: 25px; clear: both;"></div>
 
