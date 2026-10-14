@@ -26,8 +26,21 @@
             flex-wrap: nowrap !important; /* Interdit formellement le saut à la ligne */
         }
 
-        .badge-niveau { padding: 5px 12px; font-size: 11px; font-weight: bold; border-radius: 4px 4px 0 0; border: 1px solid #ccc; border-bottom: none; cursor: pointer; background: #e9ecef; color: #495057; transition: all 0.2s; }
-        
+                .badge-niveau { 
+            padding: 5px 6px !important; /* Ressert les bords gauche/droite pour gagner les pixels manquants */
+            font-size: 11px; 
+            font-weight: bold; 
+            border-radius: 4px 4px 0 0; 
+            border: 1px solid #ccc; 
+            border-bottom: none; 
+            cursor: pointer; 
+            background: #e9ecef; 
+            color: #495057; 
+            transition: all 0.2s; 
+            white-space: nowrap; /* Empêche le texte de se couper */
+        }
+
+
         /* Alignement direct des styles sur vos codes officiels de l'agenda */
         .badge-niveau.E-Bleu.actif { background: #5b95f9 !important; color: white !important; border-color: #5b95f9 !important; }
         .badge-niveau.E-Rouge.actif { background: #eb8bbd !important; color: white !important; border-color: #eb8bbd !important; }
@@ -55,7 +68,7 @@
         .logo-club { 
             width: 80px !important; 
             height: 80px !important; 
-            flex-shrink: 0 !important; /* Interdit à l'ordinateur de redimensionner le logo */
+            flex-shrink: 0 !important; 
             border-radius: 50%; 
             object-fit: cover; 
             margin-bottom: 2px; 
@@ -108,7 +121,7 @@
             </div>
             <img src="icone_CCC.jpg" alt="Logo CCC" class="logo-club">
         </div>
-        <p class="consigne-inscription">Pour s'inscrire sélectionner une date et un parcours et saisissez votre nom complet.</p>
+        <p class="consigne-inscription">Pour s'inscrire sélectionner une date puis un parcours et saisissez votre nom complet.</p>
     </div>
 
     <form id="form-inscription">
