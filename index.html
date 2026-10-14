@@ -6,44 +6,36 @@
     <title>Inscriptions CCC</title>
     <style>
         body { font-family: Arial, sans-serif; max-width: 900px; margin: 10px auto; padding: 10px; color: #333; }
-        
-	.zone-entete { display: flex; flex-direction: column; gap: 15px; margin-bottom: 1px !important; }
-
+        .zone-entete { display: flex; flex-direction: column; gap: 15px; margin-bottom: 5px !important; }
         .zone-onglets { display: flex; gap: 6px; flex-wrap: wrap; }
         .onglet { background: #f1f3f5; color: #495057; border: 1px solid #ced4da; padding: 8px 12px; font-weight: bold; font-size: 12px; border-radius: 4px; cursor: pointer; }
         .onglet.actif { background: #007BFF; color: white; border-color: #007BFF; }
         
-        /* Structure verticale du carrousel */
         .bloc-affichage-carrousel { display: flex; flex-direction: column; flex: 1; }
         .barre-niveaux-carrousel { display: flex; gap: 5px; margin-bottom: 0px; flex-wrap: wrap; }
-        
-        /* Style des intercalaires du carrousel */
         .badge-niveau { padding: 5px 12px; font-size: 11px; font-weight: bold; border-radius: 4px 4px 0 0; border: 1px solid #ccc; border-bottom: none; cursor: pointer; background: #e9ecef; color: #495057; transition: all 0.2s; }
+        
         .badge-bleu.actif { background: #5b95f9 !important; color: white !important; border-color: #5b95f9 !important; }
         .badge-erouge.actif { background: #eb8bbd !important; color: white !important; border-color: #eb8bbd !important; }
         .badge-prouge.actif { background: #ee4545 !important; color: white !important; border-color: #ee4545 !important; }
         .badge-noir.actif { background: #434343 !important; color: white !important; border-color: #434343 !important; }
         
-        /* Cadrage parfait du logo et de la boîte de détails */
         .conteneur-details-logo { display: flex; justify-content: space-between; align-items: stretch; gap: 15px; width: 100%; }
-       
-        /* La boîte de détails de base */
-        .box-details { flex: 1; background: #f8f9fa; border-left: 4px solid #007BFF; padding: 12px; font-size: 13.5px; border-radius: 0 4px 4px 4px; line-height: 1.6; transition: all 0.25s ease; }
-        .box-details h4 { margin: 0 0 5px 0; color: #007BFF; font-size: 15px; }
-
-        /* NOUVEAUTÉ : Les 4 déclinaisons de fonds pastels et de bordures associées */
+        .box-details { flex: 1; background: #f8f9fa; border-left: 4px solid #007BFF; padding: 12px; font-size: 13.5px; border-radius: 0 4px 4px 4px; line-height: 1.6; transition: all 0.2s; }
         .box-details.fond-bleu { background-color: #f0f4ff !important; border-left-color: #5b95f9 !important; }
         .box-details.fond-erouge { background-color: #fff0f6 !important; border-left-color: #eb8bbd !important; }
         .box-details.fond-prouge { background-color: #fff5f5 !important; border-left-color: #ee4545 !important; }
         .box-details.fond-noir { background-color: #f1f3f5 !important; border-left-color: #434343 !important; }
-
-
         .logo-club { width: 85px; height: 85px; border-radius: 50%; object-fit: cover; align-self: flex-end; margin-bottom: 2px; }
         
-        .consigne-inscription { font-size: 13px; color: #555; font-style: italic; margin: 5px 0 5px 0; display: block; }
+        .consigne-inscription { font-size: 13px; color: #555; font-style: italic; margin: 2px 0 2px 0 !important; padding: 0 !important; display: block; }
         table { width: 100%; border-collapse: collapse; }
         th, td { border: 1px solid #ccc; padding: 6px; text-align: center; font-size: 13px; }
         th { background: #e9ecef; }
+        
+        #table-formulaire th:not(:first-child), #table-formulaire td:not(:first-child) { display: none !important; }
+        #table-formulaire { width: 100% !important; table-layout: fixed; }
+        #table-formulaire th:first-child, #table-formulaire td:first-child { width: 100% !important; text-align: left; }
         
         .table-participants { width: 100%; border-collapse: collapse; margin-top: 15px; table-layout: fixed; }
         .table-participants th { padding: 10px 4px; font-size: 12px; font-weight: bold; }
@@ -52,32 +44,14 @@
         .th-erouge { background-color: #eb8bbd !important; color: #ffffff !important; }
         .th-prouge { background-color: #ee4545 !important; color: #ffffff !important; }
         .th-noir { background-color: #434343 !important; color: #ffffff !important; }
-
-        /*-------------------------------------------------------------------*/
-	/* Pour CACHER PROVISOIREMENT LES BOUTONS RADIOS ET LES TITRES DE NIVEAUX */
-        #table-formulaire th:not(:first-child), 
-        #table-formulaire td:not(:first-child) { 
-            display: none !important; 
-        }
         
-        /* Forcer la case de saisie du nom à prendre 100% de la largeur du tableau */
-        #table-formulaire { width: 100% !important; table-layout: fixed; }
-        #table-formulaire th:first-child { width: 100% !important; text-align: left; }
-        #table-formulaire td:first-child { width: 100% !important; text-align: left; }
-	/*-----------------------------------------------------------------------------*/
-
-        
-        .zone-ascenseur { width: 100%; margin-top: 0px; }
         .table-corps-participants { width: 100%; border-collapse: collapse; table-layout: fixed; }
         .table-corps-participants td { padding: 8px; border: 1px solid #ccc; text-align: center; font-size: 13px; }
-        
         .gauche { text-align: left !important; font-weight: bold; }
         .btn-danger { background: #DC3545; display: none; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; margin-left: 15px; }
         button { background: #007BFF; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; }
         .nb { display: block; font-weight: bold; font-size: 11px; margin-top: 4px; color: inherit; }
-        .no-sortie { color: #dc3545; font-style: italic; }
         
-        /* Zone Commentaires */
         .zone-ascenseur-comm { border: 1px solid #ced4da; background-color: #f0f4f8; padding: 10px; border-radius: 6px; margin-bottom: 12px; margin-top: 10px; }
         .titre-section-comm { font-size: 14px; font-weight: bold; margin: 4px 0 8px 0 !important; color: #495057; display: flex; align-items: center; }
         .pastille-jaune { width: 12px; height: 12px; background-color: #FFD700; border-radius: 50%; display: inline-block; margin-right: 8px; box-shadow: 0 0 4px rgba(255, 215, 0, 0.5); }
@@ -88,9 +62,7 @@
         .input-comm-msg { width: 75%; padding: 6px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; box-sizing: border-box; }
         .zone-bouton-comm { display: flex !important; justify-content: flex-end !important; width: 100%; margin-bottom: 4px !important; }
         .zone-bouton-comm button { background-color: #28a745 !important; color: white !important; font-weight: bold; border: none; padding: 7px 14px; border-radius: 4px; cursor: pointer; }
-        .zone-bouton-comm button:hover { background-color: #218838 !important; }
-        .box-details.chargement-actif { animation: pulse 1.5s infinite ease-in-out; color: #666; }
-        @keyframes pulse { 0% { opacity: 0.6; } 50% { opacity: 1; } 100% { opacity: 0.6; } }
+        .no-sortie { color: #dc3545; font-style: italic; }
     </style>
 </head>
 <body>
@@ -98,33 +70,26 @@
         <div id="barre-onglets" class="zone-onglets"></div>
         <div class="conteneur-details-logo">
             <div class="bloc-affichage-carrousel">
-                <!-- Zone où se dessinent les onglets du carrousel de niveau -->
                 <div id="carrousel-boutons" class="barre-niveaux-carrousel"></div>
-                <div id="bloc-details-parcours" class="box-details chargement-actif">⏳ Connexion sécurisée au serveur du club en cours...</div>
+                <div id="bloc-details-parcours" class="box-details">⏳ Connexion au serveur du club en cours...</div>
             </div>
             <img src="icone_CCC.jpg" alt="Logo CCC" class="logo-club">
         </div>
-        <p class="consigne-inscription">Pour s'inscrire : Sélectionnez un parcours, et saisissez votre Nom et Prénom</p>
+        <p class="consigne-inscription">Veuillez vous inscrire sur un des niveaux en saisissant votre nom complet.</p>
     </div>
 
     <form id="form-inscription">
         <table id="table-formulaire" style="margin-bottom: 15px;">
             <thead>
-                <tr>
-                    <th style="width: 36%;">Nom Prénom</th>
-                    <th>Endurance Bleu</th>
-                    <th>Endurance Rouge</th>
-                    <th>Performance Rouge</th>
-                    <th>Performance Noir</th>
-                </tr>
+                <tr><th style="width: 36%;">Nom Prénom</th><th>Bleu</th><th>E-Rouge</th><th>P-Rouge</th><th>P-Noir</th></tr>
             </thead>
             <tbody>
                 <tr>
                     <td><input type="text" id="nom" style="width:95%; padding:4px;" required placeholder="Ex: Jean Dupont"></td>
-                    <td><input type="radio" name="niveau" value="Endurance Bleu" required></td>
-                    <td><input type="radio" name="niveau" value="Endurance Rouge"></td>
-                    <td><input type="radio" name="niveau" value="Performance Rouge"></td>
-                    <td><input type="radio" name="niveau" value="Performance Noir"></td>
+                    <td><input type="radio" name="niveau" value="E-Bleu"></td>
+                    <td><input type="radio" name="niveau" value="E-Rouge"></td>
+                    <td><input type="radio" name="niveau" value="P-Rouge"></td>
+                    <td><input type="radio" name="niveau" value="P-Noir"></td>
                 </tr>
             </tbody>
         </table>
@@ -138,19 +103,17 @@
         <thead>
             <tr>
                 <th class="th-nom" style="width: 36%; text-align: left;">Nom Prénom (<span id="total-general">0</span>)</th>
-                <th class="th-bleu" style="width: 16%;">Endurance Bleu <span class="nb" id="count-bleu">(0)</span></th>
-                <th class="th-erouge" style="width: 16%;">Endurance Rouge <span class="nb" id="count-erouge">(0)</span></th>
-                <th class="th-prouge" style="width: 16%;">Performance Rouge <span class="nb" id="count-prouge">(0)</span></th>
-                <th class="th-noir" style="width: 16%;">Performance Noir <span class="nb" id="count-noir">(0)</span></th>
+                <th class="th-bleu" style="width: 16%;" id="txt-t1">E-Bleu <span class="nb" id="count-bleu">(0)</span></th>
+                <th class="th-erouge" style="width: 16%;" id="txt-t2">E-Rouge <span class="nb" id="count-erouge">(0)</span></th>
+                <th class="th-prouge" style="width: 16%;" id="txt-t3">P-Rouge <span class="nb" id="count-prouge">(0)</span></th>
+                <th class="th-noir" style="width: 16%;" id="txt-t4">P-Noir <span class="nb" id="count-noir">(0)</span></th>
             </tr>
         </thead>
     </table>
     
     <div class="zone-ascenseur">
         <table class="table-corps-participants">
-            <tbody id="liste-participants">
-                <tr><td colspan="5">Chargement...</td></tr>
-            </tbody>
+            <tbody id="liste-participants"></tbody>
         </table>
     </div>
 
@@ -167,166 +130,118 @@
     <div class="titre-section-comm">
         <span class="pastille-jaune"></span> 💬 Échanges & Commentaires
     </div>
-    <div class="zone-ascenseur-comm" id="liste-commentaires">
-        <p class="ligne-comm" style="color:#aaa; font-style:italic; font-size:13px !important; padding:4px 8px;">Aucun échange pour le moment.</p>
-    </div>
+    <div class="zone-ascenseur-comm" id="liste-commentaires"></div>
     <script>
         const API_URL = "https://script.google.com/macros/s/AKfycbzVreBXDKZ__mtZvnQrxz6tsOCrb4wX2_-rUpLWAUuxakv7Pli1hGlWAFAMVC16M4BoPg/exec";
         
-       let cacheInscrits = new Array();
+        // SOURCE UNIQUE DE VÉRITÉ : Vos 4 variables configurables
+        const NIV1 = "E-Bleu";
+        const NIV2 = "E-Rouge";
+        const NIV3 = "P-Rouge";
+        const NIV4 = "P-Noir";
+
+        let cacheInscrits = new Array();
         let cacheCommentaires = new Array();
         let cacheJoursSemaine = new Array();
         let idUniqueActif = "";
+        let niveauSelectionneActif = "";
 
-                function formaterDateOption(d) {
+        function formaterDateOption(d) {
             if (!d) return "";
-            var p = d.split('/');
-            if (p.length !== 3) return d;
-            
-            // VERROUILLAGE TECHNIQUE DE L'ORDRE DES MORCEAUX (0=Jour, 1=Mois, 2=Année)
-            var jour = parseInt(p[0], 10);
-            var mois = parseInt(p[1], 10) - 1; // En JavaScript, les mois commencent à 0 (0=Janvier)
-            var annee = parseInt(p[2], 10);
-            
-            var dateObj = new Date(annee, mois, jour);
+            const p = d.split('/'); if (p.length !== 3) return d;
+            const dateObj = new Date(parseInt(p[2], 10), parseInt(p[1], 10) - 1, parseInt(p[0], 10));
             return dateObj.toLocaleDateString('fr-FR', { weekday: 'short', day: 'numeric', month: 'short' });
         }
 
-
-
-
         async function chargerDonnees() {
+            document.getElementById('txt-t1').innerHTML = NIV1 + " <span class='nb' id='count-bleu'>(0)</span>";
+            document.getElementById('txt-t2').innerHTML = NIV2 + " <span class='nb' id='count-erouge'>(0)</span>";
+            document.getElementById('txt-t3').innerHTML = NIV3 + " <span class='nb' id='count-prouge'>(0)</span>";
+            document.getElementById('txt-t4').innerHTML = NIV4 + " <span class='nb' id='count-noir'>(0)</span>";
+            
+            const radios = document.getElementsByName("niveau");
+            if(radios.length >= 4) { radios[0].value = NIV1; radios[1].value = NIV2; radios[2].value = NIV3; radios[3].value = NIV4; }
+
             try {
-                const res = await fetch(API_URL);
-                const data = await res.json();
-                
+                const res = await fetch(API_URL); const data = await res.json();
                 cacheInscrits = data.inscrits || new Array(); 
                 cacheCommentaires = data.commentaires || new Array(); 
                 cacheJoursSemaine = data.jours || new Array();
                 
-                const barre = document.getElementById('barre-onglets');
-                barre.innerHTML = "";
-                
-                const mapURL = new URLSearchParams(window.location.search);
-                const dateForcee = mapURL.get('date');
-                let idUniqueTrouve = "";
-
+                const barre = document.getElementById('barre-onglets'); barre.innerHTML = "";
                 cacheJoursSemaine.forEach((j, idx) => {
-                    const btn = document.createElement('button');
-                    btn.type = "button"; btn.className = "onglet"; btn.id = "btn_" + j.idUnique;
-                    btn.innerText = formaterDateOption(j.date);
-                    btn.onclick = function() { basculerJour(j.idUnique); };
-                    barre.appendChild(btn);
-                    
-                    if (dateForcee && j.date === dateForcee) { idUniqueTrouve = j.idUnique; }
-                    if (idx === 0 && !idUniqueTrouve) { idUniqueActif = j.idUnique; }
+                    const btn = document.createElement('button'); btn.type = "button"; btn.className = "onglet"; btn.id = "btn_" + j.idUnique;
+                    btn.innerText = formaterDateOption(j.date); btn.onclick = function() { basculerJour(j.idUnique); };
+                    barre.appendChild(btn); if (idx === 0) idUniqueActif = j.idUnique;
                 });
-                
-                if (idUniqueTrouve) idUniqueActif = idUniqueTrouve;
-                const bActif = document.getElementById("btn_" + idUniqueActif); 
-                if (bActif) bActif.classList.add('actif');
-                
+                const bActif = document.getElementById("btn_" + idUniqueActif); if (bActif) bActif.classList.add('actif');
                 afficherDetailsEtInscrits();
             } catch (e) { console.error(e); }
         }
 
         function basculerJour(idUnique) {
             document.querySelectorAll('.onglet').forEach(b => b.classList.remove('actif'));
-            const bActif = document.getElementById("btn_" + idUnique); 
-            if (bActif) bActif.classList.add('actif');
-            idUniqueActif = idUnique;
-            afficherDetailsEtInscrits();
+            const bActif = document.getElementById("btn_" + idUnique); if (bActif) bActif.classList.add('actif');
+            idUniqueActif = idUnique; afficherDetailsEtInscrits();
         }
 
-                function afficherDetailsEtInscrits() {
+        function afficherDetailsEtInscrits() {
             const jourData = cacheJoursSemaine.find(j => j.idUnique === idUniqueActif);
             const blocDetails = document.getElementById('bloc-details-parcours');
             const barreBoutons = document.getElementById('carrousel-boutons');
-            const formTable = document.getElementById('table-formulaire'); 
             const btnValider = document.getElementById('btn-valider');
             const formCommentaire = document.getElementById('form-commentaire');
-            const inputCommNom = document.getElementById('comm-nom');
-            const inputCommMsg = document.getElementById('comm-msg');
+            const inputCommNom = document.getElementById('comm-nom'); const inputCommMsg = document.getElementById('comm-msg');
             const btnCommenter = formCommentaire ? formCommentaire.querySelector('button') : null;
 
-            if (blocDetails) blocDetails.classList.remove('chargement-actif');
             if (barreBoutons) barreBoutons.innerHTML = ""; 
 
-            // Sécurité : on filtre les parcours pour éliminer les lignes de l'agenda qui seraient totalement vides
             let parcoursValides = new Array();
-            if (jourData && jourData.aDesSorties && jourData.parcours.length > 0) {
-                parcoursValides = jourData.parcours.filter(p => p.circuit && p.circuit.toString().trim() !== "");
+            if (jourData && jourData.parcours && jourData.parcours.length > 0) { 
+                parcoursValides = jourData.parcours.filter(p => p.circuit && p.circuit.toString().trim() !== ""); 
             }
 
-            // CORRECTION : S'il n'y a aucune sortie OU si toutes les sorties trouvées ont un circuit vide (comme le 15/10)
             if (!jourData || parcoursValides.length === 0) {
+                blocDetails.className = "box-details";
                 blocDetails.innerHTML = "<h4>Détails de la journée</h4><span class='no-sortie'>Aucune sortie officielle planifiée ce jour dans l'agenda du club.</span>";
-                if (formTable) formTable.style.opacity = "0.4"; 
-                if (btnValider) btnValider.disabled = true; 
+                if (btnValider) btnValider.disabled = true; document.getElementById('nom').disabled = true;
                 if (formCommentaire) formCommentaire.style.opacity = "0.4";
                 if (inputCommNom) inputCommNom.disabled = true; if (inputCommMsg) inputCommMsg.disabled = true; if (btnCommenter) btnCommenter.disabled = true;
-                filtrerInscrits(); filtrerCommentaires();
-                return;
+                filtrerInscrits(); filtrerCommentaires(); return;
             }
 
-            // SI DES SORTIES VALIDES EXISTENT : On libère les formulaires d'écriture
-            if (formTable) formTable.style.opacity = "1"; if (btnValider) btnValider.disabled = false; 
+            if (btnValider) btnValider.disabled = false; document.getElementById('nom').disabled = false;
             if (formCommentaire) formCommentaire.style.opacity = "1";
             if (inputCommNom) inputCommNom.disabled = false; if (inputCommMsg) inputCommMsg.disabled = false; if (btnCommenter) btnCommenter.disabled = false;
 
-            // Génération dynamique des intercalaires du carrousel uniquement pour les parcours valides
             parcoursValides.forEach((p, idx) => {
-                let nomNiveauComplet = p.niveau;
-                if (p.niveau === "E-Bleu") nomNiveauComplet = "Endurance Bleu";
-                if (p.niveau === "E-Rouge") nomNiveauComplet = "Endurance Rouge";
-                if (p.niveau === "P-Rouge") nomNiveauComplet = "Performance Rouge";
-                if (p.niveau === "P-Noir") nomNiveauComplet = "Performance Noir";
-
-                const badge = document.createElement('div');
-                badge.className = "badge-niveau";
-                badge.innerText = nomNiveauComplet;
+                const badge = document.createElement('div'); badge.className = "badge-niveau"; badge.innerText = p.niveau;
+                if (p.niveau === NIV1) badge.classList.add("badge-bleu"); if (p.niveau === NIV2) badge.classList.add("badge-erouge");
+                if (p.niveau === NIV3) badge.classList.add("badge-prouge"); if (p.niveau === NIV4) badge.classList.add("badge-noir");
                 
-                if (p.niveau === "E-Bleu" || p.niveau === "Endurance Bleu") badge.classList.add("badge-bleu");
-                if (p.niveau === "E-Rouge" || p.niveau === "Endurance Rouge") badge.classList.add("badge-erouge");
-                if (p.niveau === "P-Rouge" || p.niveau === "Performance Rouge") badge.classList.add("badge-prouge");
-                if (p.niveau === "P-Noir" || p.niveau === "Performance Noir") badge.classList.add("badge-noir");
-                
-                               badge.onclick = function() {
-                    document.querySelectorAll('.badge-niveau').forEach(b => b.classList.remove('actif'));
-                    badge.classList.add('actif');
-                    
-                    // NETTOYAGE ET APPLICATION DU FOND PASTEL DYNAMIQUE
-                    blocDetails.classList.remove('fond-bleu', 'fond-erouge', 'fond-prouge', 'fond-noir');
-                    if (p.niveau === "E-Bleu") blocDetails.classList.add('fond-bleu');
-                    if (p.niveau === "E-Rouge") blocDetails.classList.add('fond-erouge');
-                    if (p.niveau === "P-Rouge") blocDetails.classList.add('fond-prouge');
-                    if (p.niveau === "P-Noir") blocDetails.classList.add('fond-noir');
+                badge.onclick = function() {
+                    document.querySelectorAll('.badge-niveau').forEach(b => b.classList.remove('actif')); badge.classList.add('actif');
+                    niveauSelectionneActif = p.niveau;
+                    blocDetails.className = "box-details";
+                    if (p.niveau === NIV1) blocDetails.classList.add('fond-bleu'); if (p.niveau === NIV2) blocDetails.classList.add('fond-erouge');
+                    if (p.niveau === NIV3) blocDetails.classList.add('fond-prouge'); if (p.niveau === NIV4) blocDetails.classList.add('fond-noir');
                     
                     let openrunnerNettoye = p.openrunner ? p.openrunner.toString().trim() : "";
                     let openrunnerLink = "Tracé N/C";
                     if (openrunnerNettoye !== "") {
-                        // ADRESSE FIXE OFFICIELLE INTÉGRALE ET SÉCURISÉE
-                        const urlComplete = openrunnerNettoye.startsWith("http") ? openrunnerNettoye : "https://openrunner.com/route-details/" + openrunnerNettoye;
+                        const urlComplete = openrunnerNettoye.startsWith("http") ? openrunnerNettoye : "https://openrunner.com" + openrunnerNettoye;
                         openrunnerLink = "<a href='" + urlComplete + "' target='_blank'>Tracé OpenRunner</a>";
                     }
-                    let kmTxt = p.km ? p.km.toString().trim() + " km" : "N/C"; 
-                    let denivTxt = p.deniv ? p.deniv.toString().trim() + " m D+" : "N/C";
-                    
-                    blocDetails.innerHTML = 
-                        "<strong>Départ :</strong> " + (p.depart || "N/C") + " &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>Pilote :</strong> " + (p.pilote || "Non désigné") + "<br>" + 
+                    let kmTxt = p.km ? p.km.toString().trim() + " km" : "N/C"; let denivTxt = p.deniv ? p.deniv.toString().trim() + " m D+" : "N/C";
+                    blocDetails.innerHTML = "<strong>Départ :</strong> " + (p.depart || "N/C") + " &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>Pilote :</strong> " + (p.pilote || "Non désigné") + "<br>" + 
                         "<strong>Circuit :</strong> " + openrunnerLink + " (" + kmTxt + " / " + denivTxt + ") &nbsp;•&nbsp; " + p.circuit;
-                        
-                    const radioBouton = document.querySelector('input[name="niveau"][value="' + nomNiveauComplet + '"]');
+                    
+                    const radioBouton = document.querySelector('input[name="niveau"][value="' + p.niveau + '"]');
                     if (radioBouton) radioBouton.checked = true;
                 };
-
-                
-                barreBoutons.appendChild(badge);
-                if (idx === 0) { badge.click(); }
+                barreBoutons.appendChild(badge); if (idx === 0) badge.click();
             });
-
-            filtrerInscrits(); 
-            filtrerCommentaires();
+            filtrerInscrits(); filtrerCommentaires();
         }
 
         function filtrerInscrits() {
@@ -336,18 +251,28 @@
             filtres.forEach(c => uiLigne(c.nom, c.niveau)); uiCompteurs();
         }
 
-        function filtrerCommentaires() {
-            const container = document.getElementById('liste-commentaires'); 
-            container.innerHTML = "";
-            let filtres = cacheCommentaires.filter(m => m.idUnique === idUniqueActif);
-            if (filtres.length === 0) { 
-                container.innerHTML = "<p class='ligne-comm' style='color:#aaa; font-style:italic; font-size:13px !important; padding:4px 8px;'>Aucun échange pour le moment.</p>"; 
-                return; 
-            }
-            filtres.forEach(m => { 
-                container.innerHTML += "<p class='ligne-comm' style='font-size:13px !important; padding:4px 8px; margin:0 0 5px 0;'><span class='bulle-nom'>[" + m.nom + "]</span> : " + m.message + "</p>"; 
-            });
-            container.scrollTop = container.scrollHeight;
+        function uiLigne(nom, niveau) {
+            const tbody = document.getElementById('liste-participants');
+            const aucun = tbody.querySelector('tr'); if (aucun && aucun.querySelector('#ligne-aucun')) aucun.remove();
+            let trExistant = null;
+            tbody.querySelectorAll('tr').forEach(tr => { if (tr.querySelector('.gauche').innerText.toLowerCase() === nom.toLowerCase()) trExistant = tr; });
+            
+            const styleVert = "style='width:16%; background-color: #e2f0d9; color: #28a745; font-weight: bold; font-size: 14px;'";
+            const styleNormal = "style='width:16%;'";
+            
+            // CORRECTION DE SÉCURITÉ DOUBLE FORMAT (LONG ET COURT)
+            const estBleu = (niveau === NIV1 || niveau === "E-Bleu" || niveau === "Endurance Bleu");
+            const estERouge = (niveau === NIV2 || niveau === "E-Rouge" || niveau === "Endurance Rouge");
+            const estPRouge = (niveau === NIV3 || niveau === "P-Rouge" || niveau === "Performance Rouge");
+            const estNoir = (niveau === NIV4 || niveau === "P-Noir" || niveau === "Performance Noir");
+            
+            const contenu = "<td class='gauche' style='width:36%;'>" + nom + "</td>" +
+                "<td " + (estBleu ? styleVert : styleNormal) + ">" + (estBleu ? "✔️" : "") + "</td>" +
+                "<td " + (estERouge ? styleVert : styleNormal) + ">" + (estERouge ? "✔️" : "") + "</td>" +
+                "<td " + (estPRouge ? styleVert : styleNormal) + ">" + (estPRouge ? "✔️" : "") + "</td>" +
+                "<td " + (estNoir ? styleVert : styleNormal) + ">" + (estNoir ? "✔️" : "") + "</td>";
+                
+            if (trExistant) { trExistant.innerHTML = contenu; } else { const tr = document.createElement('tr'); tr.innerHTML = contenu; tbody.appendChild(tr); }
         }
 
         function uiCompteurs() {
@@ -358,64 +283,64 @@
                 const tds = tr.querySelectorAll('td');
                 if (tds.length >= 5) {
                     t++;
-                    if (tds.innerText === "✔️") b++; 
-                    if (tds.innerText === "✔️") er++; 
-                    if (tds.innerText === "✔️") pr++; 
-                    if (tds.innerText === "✔️") n++;
+                    if (tds[1].innerText === "✔️") b++; 
+                    if (tds[2].innerText === "✔️") er++; 
+                    if (tds[3].innerText === "✔️") pr++; 
+                    if (tds[4].innerText === "✔️") n++;
                 }
             });
             document.getElementById('total-general').innerText = t; 
-            document.getElementById('count-bleu').innerText = "(" + b + ")";
+            document.getElementById('count-bleu').innerText = "(" + b + ")"; 
             document.getElementById('count-erouge').innerText = "(" + er + ")"; 
             document.getElementById('count-prouge').innerText = "(" + pr + ")"; 
             document.getElementById('count-noir').innerText = "(" + n + ")";
         }
 
-        function uiLigne(nom, niveau) {
-            const tbody = document.getElementById('liste-participants');
-            const aucun = tbody.querySelector('tr');
-            if (aucun && aucun.querySelector('#ligne-aucun')) aucun.remove();
-            let trExistant = null;
-            tbody.querySelectorAll('tr').forEach(tr => { if (tr.querySelector('.gauche').innerText.toLowerCase() === nom.toLowerCase()) trExistant = tr; });
-            
-            const styleVert = "style='width:16%; background-color: #e2f0d9; color: #28a745; font-weight: bold; font-size: 14px;'";
-            const styleNormal = "style='width:16%;'";
-            
-            const contenu = "<td class='gauche' style='width:36%;'>" + nom + "</td>" +
-                "<td " + (niveau === "Endurance Bleu" ? styleVert : styleNormal) + ">" + (niveau === "Endurance Bleu" ? "✔️" : "") + "</td>" +
-                "<td " + (niveau === "Endurance Rouge" ? styleVert : styleNormal) + ">" + (niveau === "Endurance Rouge" ? "✔️" : "") + "</td>" +
-                "<td " + (niveau === "Performance Rouge" ? styleVert : styleNormal) + ">" + (niveau === "Performance Rouge" ? "✔️" : "") + "</td>" +
-                "<td " + (niveau === "Performance Noir" ? styleVert : styleNormal) + ">" + (niveau === "Performance Noir" ? "✔️" : "") + "</td>";
-            if (trExistant) { trExistant.innerHTML = contenu; } 
-            else { const tr = document.createElement('tr'); tr.innerHTML = contenu; tbody.appendChild(tr); }
+        function filtrerCommentaires() {
+            const container = document.getElementById('liste-commentaires'); container.innerHTML = "";
+            let filtres = cacheCommentaires.filter(m => m.idUnique === idUniqueActif);
+            if (filtres.length === 0) { container.innerHTML = "<p style='color:#aaa; font-style:italic; font-size:13px; padding:4px;'>Aucun échange pour le moment.</p>"; return; }
+            filtres.forEach(m => { container.innerHTML += "<p class='ligne-comm' style='font-size:13px !important; padding:4px 8px; margin:0 0 5px 0;'><span class='bulle-nom'>[" + m.nom + "]</span> : " + m.message + "</p>"; });
         }
 
         document.getElementById('nom').addEventListener('input', function(e) {
             document.getElementById('btn-annuler').style.display = e.target.value.trim().length > 2 ? "inline-block" : "none";
         });
 
-        document.getElementById('form-inscription').addEventListener('submit', function(e) {
-            e.preventDefault(); const nom = document.getElementById('nom').value.trim(); const rad = document.querySelector('input[name="niveau"]:checked'); if(!rad || !idUniqueActif) return;
-            uiLigne(nom, rad.value); cacheInscrits = cacheInscrits.filter(c => !(c.nom.toLowerCase() === nom.toLowerCase() && c.idUnique === idUniqueActif));
-            cacheInscrits.push({ nom: nom, niveau: rad.value, idUnique: idUniqueActif }); uiCompteurs();
-            document.getElementById('comm-nom').value = nom; document.getElementById('nom').value = ""; document.getElementById('btn-annuler').style.display = "none";
-            fetch(API_URL, { method: 'POST', body: JSON.stringify({ action: "inscrire", nom: nom, niveau: rad.value, idUnique: idUniqueActif }) }); rad.checked = false;
-        });
-
-        document.getElementById('btn-annuler').addEventListener('click', function() {
-            const nom = document.getElementById('nom').value.trim(); if(!nom || !idUniqueActif || !confirm("Annuler l'inscription de " + nom + " ?")) return;
+        document.getElementById('form-inscription').addEventListener('submit', async function(e) {
+            e.preventDefault(); const btn = document.getElementById('btn-valider'); const inputNom = document.getElementById('nom'); const nom = inputNom.value.trim();
+            if(!nom || !niveauSelectionneActif || !idUniqueActif) return;
+            btn.disabled = true;
+            uiLigne(nom, niveauSelectionneActif);
             cacheInscrits = cacheInscrits.filter(c => !(c.nom.toLowerCase() === nom.toLowerCase() && c.idUnique === idUniqueActif));
-            filtrerInscrits(); document.getElementById('nom').value = ""; document.getElementById('btn-annuler').style.display = "none";
-            fetch(API_URL, { method: 'POST', body: JSON.stringify({ action: "annuler", nom: nom, idUnique: idUniqueActif }) });
+            cacheInscrits.push({ nom: nom, niveau: niveauSelectionneActif, idUnique: idUniqueActif }); uiCompteurs();
+            document.getElementById('comm-nom').value = nom; inputNom.value = ""; document.getElementById('btn-annuler').style.display = "none";
+            try {
+                await fetch(API_URL, { method: 'POST', body: JSON.stringify({ action: "inscrire", nom: nom, niveau: niveauSelectionneActif, idUnique: idUniqueActif }) });
+            } catch(err) { console.error(err); }
+            btn.disabled = false;
         });
 
-        document.getElementById('form-commentaire').addEventListener('submit', function(e) {
+        document.getElementById('btn-annuler').addEventListener('click', async function() {
+            const nom = document.getElementById('nom').value.trim(); if(!nom || !idUniqueActif || !confirm("Annuler l'inscription de " + nom + " ?")) return;
+            const btnA = document.getElementById('btn-annuler'); btnA.disabled = true;
+            cacheInscrits = cacheInscrits.filter(c => !(c.nom.toLowerCase() === nom.toLowerCase() && c.idUnique === idUniqueActif));
+            filtrerInscrits(); document.getElementById('nom').value = ""; btnA.style.display = "none";
+            try {
+                await fetch(API_URL, { method: 'POST', body: JSON.stringify({ action: "annuler", nom: nom, idUnique: idUniqueActif }) });
+            } catch(err) { console.error(err); }
+            btnA.disabled = false;
+        });
+
+        document.getElementById('form-commentaire').addEventListener('submit', async function(e) {
             e.preventDefault(); const cNom = document.getElementById('comm-nom').value.trim(); const cMsg = document.getElementById('comm-msg').value.trim(); if (!cNom || !cMsg || !idUniqueActif) return;
             cacheCommentaires.push({ nom: cNom, message: cMsg, idUnique: idUniqueActif }); filtrerCommentaires(); document.getElementById('comm-msg').value = "";
-            fetch(API_URL, { method: 'POST', body: JSON.stringify({ action: "commenter", nom: cNom, message: cMsg, idUnique: idUniqueActif }) });
+            try { await fetch(API_URL, { method: 'POST', body: JSON.stringify({ action: "commenter", nom: cNom, message: cMsg, idUnique: idUniqueActif }) }); } catch(err) { console.error(err); }
         });
 
         chargerDonnees();
     </script>
 </body>
 </html>
+
+
