@@ -15,17 +15,20 @@
         .barre-niveaux-carrousel { display: flex; gap: 5px; margin-bottom: 0px; flex-wrap: wrap; }
         .badge-niveau { padding: 5px 12px; font-size: 11px; font-weight: bold; border-radius: 4px 4px 0 0; border: 1px solid #ccc; border-bottom: none; cursor: pointer; background: #e9ecef; color: #495057; transition: all 0.2s; }
         
-        .badge-bleu.actif { background: #5b95f9 !important; color: white !important; border-color: #5b95f9 !important; }
-        .badge-erouge.actif { background: #eb8bbd !important; color: white !important; border-color: #eb8bbd !important; }
-        .badge-prouge.actif { background: #ee4545 !important; color: white !important; border-color: #ee4545 !important; }
-        .badge-noir.actif { background: #434343 !important; color: white !important; border-color: #434343 !important; }
+        /* Alignement direct des styles sur vos codes officiels de l'agenda */
+        .badge-niveau.E-Bleu.actif { background: #5b95f9 !important; color: white !important; border-color: #5b95f9 !important; }
+        .badge-niveau.E-Rouge.actif { background: #eb8bbd !important; color: white !important; border-color: #eb8bbd !important; }
+        .badge-niveau.P-Rouge.actif { background: #ee4545 !important; color: white !important; border-color: #ee4545 !important; }
+        .badge-niveau.P-Noir.actif { background: #434343 !important; color: white !important; border-color: #434343 !important; }
         
         .conteneur-details-logo { display: flex; justify-content: space-between; align-items: stretch; gap: 15px; width: 100%; }
         .box-details { flex: 1; background: #f8f9fa; border-left: 4px solid #007BFF; padding: 12px; font-size: 13.5px; border-radius: 0 4px 4px 4px; line-height: 1.6; transition: all 0.2s; }
-        .box-details.fond-bleu { background-color: #f0f4ff !important; border-left-color: #5b95f9 !important; }
-        .box-details.fond-erouge { background-color: #fff0f6 !important; border-left-color: #eb8bbd !important; }
-        .box-details.fond-prouge { background-color: #fff5f5 !important; border-left-color: #ee4545 !important; }
-        .box-details.fond-noir { background-color: #f1f3f5 !important; border-left-color: #434343 !important; }
+        
+        /* Alignement direct des fonds pastels sur vos codes officiels de l'agenda */
+        .box-details.fond-E-Bleu { background-color: #f0f4ff !important; border-left-color: #5b95f9 !important; }
+        .box-details.fond-E-Rouge { background-color: #fff0f6 !important; border-left-color: #eb8bbd !important; }
+        .box-details.fond-P-Rouge { background-color: #fff5f5 !important; border-left-color: #ee4545 !important; }
+        .box-details.fond-P-Noir { background-color: #f1f3f5 !important; border-left-color: #434343 !important; }
         .logo-club { width: 85px; height: 85px; border-radius: 50%; object-fit: cover; align-self: flex-end; margin-bottom: 2px; }
         
         .consigne-inscription { font-size: 13px; color: #555; font-style: italic; margin: 2px 0 2px 0 !important; padding: 0 !important; display: block; }
@@ -33,6 +36,7 @@
         th, td { border: 1px solid #ccc; padding: 6px; text-align: center; font-size: 13px; }
         th { background: #e9ecef; }
         
+        /* Masquage propre du choix des boutons radios du haut */
         #table-formulaire th:not(:first-child), #table-formulaire td:not(:first-child) { display: none !important; }
         #table-formulaire { width: 100% !important; table-layout: fixed; }
         #table-formulaire th:first-child, #table-formulaire td:first-child { width: 100% !important; text-align: left; }
@@ -81,7 +85,7 @@
     <form id="form-inscription">
         <table id="table-formulaire" style="margin-bottom: 15px;">
             <thead>
-                <tr><th style="width: 36%;">Nom Prénom</th><th>Bleu</th><th>E-Rouge</th><th>P-Rouge</th><th>P-Noir</th></tr>
+                <tr><th style="width: 36%;">Nom Prénom</th><th>E-Bleu</th><th>E-Rouge</th><th>P-Rouge</th><th>P-Noir</th></tr>
             </thead>
             <tbody>
                 <tr>
@@ -99,14 +103,15 @@
         </div>
     </form>
 
+    <!-- LIBELLÉS EN DUR MODIFIABLES EN DIRECT ICI -->
     <table class="table-participants">
         <thead>
             <tr>
                 <th class="th-nom" style="width: 36%; text-align: left;">Nom Prénom (<span id="total-general">0</span>)</th>
-                <th class="th-bleu" style="width: 16%;" id="txt-t1">E-Bleu <span class="nb" id="count-bleu">(0)</span></th>
-                <th class="th-erouge" style="width: 16%;" id="txt-t2">E-Rouge <span class="nb" id="count-erouge">(0)</span></th>
-                <th class="th-prouge" style="width: 16%;" id="txt-t3">P-Rouge <span class="nb" id="count-prouge">(0)</span></th>
-                <th class="th-noir" style="width: 16%;" id="txt-t4">P-Noir <span class="nb" id="count-noir">(0)</span></th>
+                <th class="th-bleu" style="width: 16%;">End. Bleu <span class="nb" id="count-bleu">(0)</span></th>
+                <th class="th-erouge" style="width: 16%;">End. Rouge <span class="nb" id="count-erouge">(0)</span></th>
+                <th class="th-prouge" style="width: 16%;">Perf. Rouge <span class="nb" id="count-prouge">(0)</span></th>
+                <th class="th-noir" style="width: 16%;">Perf. Noir <span class="nb" id="count-noir">(0)</span></th>
             </tr>
         </thead>
     </table>
@@ -131,21 +136,17 @@
         <span class="pastille-jaune"></span> 💬 Échanges & Commentaires
     </div>
     <div class="zone-ascenseur-comm" id="liste-commentaires"></div>
-    <script>
+   
+ <script>
         const API_URL = "https://script.google.com/macros/s/AKfycbzVreBXDKZ__mtZvnQrxz6tsOCrb4wX2_-rUpLWAUuxakv7Pli1hGlWAFAMVC16M4BoPg/exec";
         
-        // SOURCE UNIQUE DE VÉRITÉ : Vos 4 variables configurables
-        const NIV1 = "End. Bleu";
-        const NIV2 = "End. Rouge";
-        const NIV3 = "Perf. Rouge";
-        const NIV4 = "Perf. Noir";
-
         let cacheInscrits = new Array();
         let cacheCommentaires = new Array();
         let cacheJoursSemaine = new Array();
         let idUniqueActif = "";
         let niveauSelectionneActif = "";
 
+        // FORMULE ANTI-BUG DES DATES SÉCURISÉE (ORDRE : ANNÉE, MOIS, JOUR BLINDÉ)
         function formaterDateOption(d) {
             if (!d) return "";
             const p = d.split('/'); if (p.length !== 3) return d;
@@ -154,27 +155,28 @@
         }
 
         async function chargerDonnees() {
-            document.getElementById('txt-t1').innerHTML = NIV1 + " <span class='nb' id='count-bleu'>(0)</span>";
-            document.getElementById('txt-t2').innerHTML = NIV2 + " <span class='nb' id='count-erouge'>(0)</span>";
-            document.getElementById('txt-t3').innerHTML = NIV3 + " <span class='nb' id='count-prouge'>(0)</span>";
-            document.getElementById('txt-t4').innerHTML = NIV4 + " <span class='nb' id='count-noir'>(0)</span>";
-            
-            const radios = document.getElementsByName("niveau");
-            if(radios.length >= 4) { radios[0].value = NIV1; radios[1].value = NIV2; radios[2].value = NIV3; radios[3].value = NIV4; }
-
             try {
-                const res = await fetch(API_URL); const data = await res.json();
+                const res = await fetch(API_URL); 
+                const data = await res.json();
                 cacheInscrits = data.inscrits || new Array(); 
                 cacheCommentaires = data.commentaires || new Array(); 
                 cacheJoursSemaine = data.jours || new Array();
                 
-                const barre = document.getElementById('barre-onglets'); barre.innerHTML = "";
+                const barre = document.getElementById('barre-onglets'); 
+                barre.innerHTML = "";
+                
                 cacheJoursSemaine.forEach((j, idx) => {
-                    const btn = document.createElement('button'); btn.type = "button"; btn.className = "onglet"; btn.id = "btn_" + j.idUnique;
-                    btn.innerText = formaterDateOption(j.date); btn.onclick = function() { basculerJour(j.idUnique); };
-                    barre.appendChild(btn); if (idx === 0) idUniqueActif = j.idUnique;
+                    const btn = document.createElement('button'); 
+                    btn.type = "button"; btn.className = "onglet"; btn.id = "btn_" + j.idUnique;
+                    btn.innerText = formaterDateOption(j.date); 
+                    btn.onclick = function() { basculerJour(j.idUnique); };
+                    barre.appendChild(btn); 
+                    if (idx === 0) idUniqueActif = j.idUnique;
                 });
-                const bActif = document.getElementById("btn_" + idUniqueActif); if (bActif) bActif.classList.add('actif');
+                
+                const bActif = document.getElementById("btn_" + idUniqueActif); 
+                if (bActif) bActif.classList.add('actif');
+                
                 afficherDetailsEtInscrits();
             } catch (e) { console.error(e); }
         }
@@ -215,16 +217,16 @@
             if (inputCommNom) inputCommNom.disabled = false; if (inputCommMsg) inputCommMsg.disabled = false; if (btnCommenter) btnCommenter.disabled = false;
 
             parcoursValides.forEach((p, idx) => {
-                const badge = document.createElement('div'); badge.className = "badge-niveau"; badge.innerText = p.niveau;
-                if (p.niveau === NIV1) badge.classList.add("badge-bleu"); if (p.niveau === NIV2) badge.classList.add("badge-erouge");
-                if (p.niveau === NIV3) badge.classList.add("badge-prouge"); if (p.niveau === NIV4) badge.classList.add("badge-noir");
+                const badge = document.createElement('div'); 
+                badge.className = "badge-niveau " + p.niveau; // Liaison directe avec le CSS (E-Bleu, E-Rouge, etc.)
+                badge.innerText = p.niveau;
                 
                 badge.onclick = function() {
-                    document.querySelectorAll('.badge-niveau').forEach(b => b.classList.remove('actif')); badge.classList.add('actif');
+                    document.querySelectorAll('.badge-niveau').forEach(b => b.classList.remove('actif')); 
+                    badge.classList.add('actif');
                     niveauSelectionneActif = p.niveau;
-                    blocDetails.className = "box-details";
-                    if (p.niveau === NIV1) blocDetails.classList.add('fond-bleu'); if (p.niveau === NIV2) blocDetails.classList.add('fond-erouge');
-                    if (p.niveau === NIV3) blocDetails.classList.add('fond-prouge'); if (p.niveau === NIV4) blocDetails.classList.add('fond-noir');
+                    
+                    blocDetails.className = "box-details fond-" + p.niveau; // Liaison directe avec le fond pastel CSS
                     
                     let openrunnerNettoye = p.openrunner ? p.openrunner.toString().trim() : "";
                     let openrunnerLink = "Tracé N/C";
@@ -243,7 +245,6 @@
             });
             filtrerInscrits(); filtrerCommentaires();
         }
-
         function filtrerInscrits() {
             const tbody = document.getElementById('liste-participants'); tbody.innerHTML = "";
             let filtres = cacheInscrits.filter(c => c.idUnique === idUniqueActif);
@@ -260,17 +261,17 @@
             const styleVert = "style='width:16%; background-color: #e2f0d9; color: #28a745; font-weight: bold; font-size: 14px;'";
             const styleNormal = "style='width:16%;'";
             
-            // CORRECTION DE SÉCURITÉ DOUBLE FORMAT (LONG ET COURT)
-            const estBleu = (niveau === NIV1 || niveau === "E-Bleu" || niveau === "Endurance Bleu");
-            const estERouge = (niveau === NIV2 || niveau === "E-Rouge" || niveau === "Endurance Rouge");
-            const estPRouge = (niveau === NIV3 || niveau === "P-Rouge" || niveau === "Performance Rouge");
-            const estNoir = (niveau === NIV4 || niveau === "P-Noir" || niveau === "Performance Noir");
+            // FILTRAGE ET COCHES SÉCURISÉES SUR LES CODES BRUTS DU SCRIPT GOOGLE
+            const estN1 = (niveau === "E-Bleu" || niveau === "Endurance Bleu");
+            const estN2 = (niveau === "E-Rouge" || niveau === "Endurance Rouge");
+            const estN3 = (niveau === "P-Rouge" || niveau === "Performance Rouge");
+            const estN4 = (niveau === "P-Noir" || niveau === "Performance Noir");
             
             const contenu = "<td class='gauche' style='width:36%;'>" + nom + "</td>" +
-                "<td " + (estBleu ? styleVert : styleNormal) + ">" + (estBleu ? "✔️" : "") + "</td>" +
-                "<td " + (estERouge ? styleVert : styleNormal) + ">" + (estERouge ? "✔️" : "") + "</td>" +
-                "<td " + (estPRouge ? styleVert : styleNormal) + ">" + (estPRouge ? "✔️" : "") + "</td>" +
-                "<td " + (estNoir ? styleVert : styleNormal) + ">" + (estNoir ? "✔️" : "") + "</td>";
+                "<td " + (estN1 ? styleVert : styleNormal) + ">" + (estN1 ? "✔️" : "") + "</td>" +
+                "<td " + (estN2 ? styleVert : styleNormal) + ">" + (estN2 ? "✔️" : "") + "</td>" +
+                "<td " + (estN3 ? styleVert : styleNormal) + ">" + (estN3 ? "✔️" : "") + "</td>" +
+                "<td " + (estN4 ? styleVert : styleNormal) + ">" + (estN4 ? "✔️" : "") + "</td>";
                 
             if (trExistant) { trExistant.innerHTML = contenu; } else { const tr = document.createElement('tr'); tr.innerHTML = contenu; tbody.appendChild(tr); }
         }
@@ -283,10 +284,10 @@
                 const tds = tr.querySelectorAll('td');
                 if (tds.length >= 5) {
                     t++;
-                    if (tds[1].innerText === "✔️") b++; 
-                    if (tds[2].innerText === "✔️") er++; 
-                    if (tds[3].innerText === "✔️") pr++; 
-                    if (tds[4].innerText === "✔️") n++;
+                    if (tds.innerText === "✔️") b++; 
+                    if (tds.innerText === "✔️") er++; 
+                    if (tds.innerText === "✔️") pr++; 
+                    if (tds.innerText === "✔️") n++;
                 }
             });
             document.getElementById('total-general').innerText = t; 
@@ -342,5 +343,3 @@
     </script>
 </body>
 </html>
-
-
