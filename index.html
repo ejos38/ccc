@@ -111,14 +111,25 @@
         button { background: #007BFF; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; }
         .nb { display: block; font-weight: bold; font-size: 11px; margin-top: 4px; color: inherit; }
         
-	/* NOUVELLE RÈGLE DE VERROUILLAGE POUR LE TABLEAU DES INSCRITS */
+        /* 1. SUPPRESSION DE L'ASCENSEUR DU TABLEAU DES PARTICIPANTS */
         .zone-ascenseur { 
             width: 100%; 
-            max-height: 250px; 
-            overflow-y: auto; 
-            overflow-x: hidden; /* Empêche le décalage horizontal de la première colonne */
+            max-height: none !important; /* Supprime la limite de hauteur */
+            overflow: visible !important; /* Rend le tableau entièrement visible */
         }
-        .zone-ascenseur-comm { border: 1px solid #ced4da; background-color: #f0f4f8; padding: 10px; border-radius: 6px; margin-bottom: 12px; margin-top: 10px; }
+
+        /* 2. SUPPRESSION DE L'ASCENSEUR DE LA ZONE DES COMMENTAIRES */
+        .zone-ascenseur-comm { 
+            border: 1px solid #ced4da; 
+            background-color: #f0f4f8; 
+            padding: 10px; 
+            border-radius: 6px; 
+            margin-bottom: 12px; 
+            margin-top: 10px; 
+            max-height: none !important; /* Supprime la limite de hauteur */
+            overflow: visible !important; /* Rend les échanges entièrement visibles */
+        }
+
 
         .titre-section-comm { font-size: 14px; font-weight: bold; margin: 4px 0 8px 0 !important; color: #495057; display: flex; align-items: center; }
         .pastille-jaune { width: 12px; height: 12px; background-color: #FFD700; border-radius: 50%; display: inline-block; margin-right: 8px; box-shadow: 0 0 4px rgba(255, 215, 0, 0.5); }
