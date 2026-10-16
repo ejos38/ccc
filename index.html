@@ -401,6 +401,14 @@
             if(!nom || !niveauSelectionneActif || !idUniqueActif) return;
             btn.disabled = true;
             uiLigne(nom, niveauSelectionneActif);
+	setTimeout(function() {
+                let toutesLesLignes = document.getElementById('liste-participants').querySelectorAll('tr');
+                toutesLesLignes.forEach(tr => {
+                    if (tr.querySelector('.gauche').innerText.toLowerCase() === nom.toLowerCase()) {
+                        tr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                });
+            }, 50);
             cacheInscrits = cacheInscrits.filter(c => !(c.nom.toLowerCase() === nom.toLowerCase() && c.idUnique === idUniqueActif));
             cacheInscrits.push({ nom: nom, niveau: niveauSelectionneActif, idUnique: idUniqueActif }); uiCompteurs();
             document.getElementById('comm-nom').value = nom; inputNom.value = ""; document.getElementById('btn-annuler').style.display = "none";
