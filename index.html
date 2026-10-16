@@ -306,7 +306,7 @@
                     let openrunnerNettoye = p.openrunner ? p.openrunner.toString().trim() : "";
                     let openrunnerLink = "Tracé N/C";
                     if (openrunnerNettoye !== "") {
-                        const urlComplete = openrunnerNettoye.startsWith("http") ? openrunnerNettoye : "https://openrunner.com" + openrunnerNettoye;
+                        const urlComplete = openrunnerNettoye.startsWith("http") ? openrunnerNettoye : "https://openrunner.com/route-details/" + openrunnerNettoye;
                         openrunnerLink = "<a href='" + urlComplete + "' target='_blank'>Tracé OpenRunner</a>";
                     }
                     let kmTxt = p.km ? p.km.toString().trim() + " km" : "N/C"; let denivTxt = p.deniv ? p.deniv.toString().trim() + " m D+" : "N/C";
