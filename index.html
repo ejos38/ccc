@@ -352,25 +352,38 @@
         }
 
         function uiCompteurs() {
+            // On cible uniquement les lignes du corps du tableau, en ignorant l'en-tête th
             const lignes = document.getElementById('liste-participants').querySelectorAll('tr');
-            let t=0, b=0, er=0, pr=0, n=0;
+            let totalGeneral = 0;
+            let totalBleu = 0;
+            let totalERouge = 0;
+            let totalPRouge = 0;
+            let totalNoir = 0;
+            
             lignes.forEach(tr => {
+                // Si la ligne indique qu'il n'y a aucun inscrit, on ne compte rien
                 if(tr.querySelector('#ligne-aucun')) return;
+                
                 const tds = tr.querySelectorAll('td');
                 if (tds.length >= 5) {
-                    t++;
-                    if (tds.innerText === "✔️") b++; 
-                    if (tds.innerText === "✔️") er++; 
-                    if (tds.innerText === "✔️") pr++; 
-                    if (tds.innerText === "✔️") n++;
+                    totalGeneral++;
+                    
+                    // Vérification stricte du texte brut de chaque colonne de présence (1 à 4)
+                    if (tds[1].innerText.trim() === "✔️") totalBleu++; 
+                    if (tds[2].innerText.trim() === "✔️") totalERouge++; 
+                    if (tds[3].innerText.trim() === "✔️") totalPRouge++; 
+                    if (tds[4].innerText.trim() === "✔️") totalNoir++;
                 }
             });
-            document.getElementById('total-general').innerText = t; 
-            document.getElementById('count-bleu').innerText = "(" + b + ")"; 
-            document.getElementById('count-erouge').innerText = "(" + er + ")"; 
-            document.getElementById('count-prouge').innerText = "(" + pr + ")"; 
-            document.getElementById('count-noir').innerText = "(" + n + ")";
+            
+            // Injection en temps réel des totaux calculés dans vos en-têtes en dur
+            document.getElementById('total-general').innerText = totalGeneral; 
+            document.getElementById('count-bleu').innerText = "(" + totalBleu + ")"; 
+            document.getElementById('count-erouge').innerText = "(" + totalERouge + ")"; 
+            document.getElementById('count-prouge').innerText = "(" + totalPRouge + ")"; 
+            document.getElementById('count-noir').innerText = "(" + totalNoir + ")";
         }
+
 
         function filtrerCommentaires() {
             const container = document.getElementById('liste-commentaires'); container.innerHTML = "";
