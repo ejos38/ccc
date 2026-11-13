@@ -319,6 +319,8 @@
                 barreBoutons.appendChild(badge); if (idx === 0) badge.click();
             });
             filtrerInscrits(); filtrerCommentaires();
+	   if (document.getElementById('nom').value.trim().length > 2) { document.getElementById('btn-annuler').style.display = "inline-block"; } else { document.getElementById('btn-annuler').style.display = "none"; }
+
         }
         function filtrerInscrits() {
             const tbody = document.getElementById('liste-participants'); tbody.innerHTML = "";
@@ -396,12 +398,12 @@
             document.getElementById('btn-annuler').style.display = e.target.value.trim().length > 2 ? "inline-block" : "none";
         });
 
-        document.getElementById('form-inscription').addEventListener('submit', async function(e) {
+          document.getElementById('form-inscription').addEventListener('submit', async function(e) {
             e.preventDefault(); const btn = document.getElementById('btn-valider'); const inputNom = document.getElementById('nom'); const nom = inputNom.value.trim();
             if(!nom || !niveauSelectionneActif || !idUniqueActif) return;
             btn.disabled = true;
             uiLigne(nom, niveauSelectionneActif);
-	setTimeout(function() {
+            setTimeout(function() {
                 let toutesLesLignes = document.getElementById('liste-participants').querySelectorAll('tr');
                 toutesLesLignes.forEach(tr => {
                     if (tr.querySelector('.gauche').innerText.toLowerCase() === nom.toLowerCase()) {
@@ -411,7 +413,10 @@
             }, 50);
             cacheInscrits = cacheInscrits.filter(c => !(c.nom.toLowerCase() === nom.toLowerCase() && c.idUnique === idUniqueActif));
             cacheInscrits.push({ nom: nom, niveau: niveauSelectionneActif, idUnique: idUniqueActif }); uiCompteurs();
-            document.getElementById('comm-nom').value = nom; inputNom.value = ""; document.getElementById('btn-annuler').style.display = "none";
+            
+            // ---------------;
+            document.getElementById('comm-nom').value = nom; document.getElementById('btn-annuler').style.display = "inline-block";
+
             try {
                 await fetch(API_URL, { method: 'POST', body: JSON.stringify({ action: "inscrire", nom: nom, niveau: niveauSelectionneActif, idUnique: idUniqueActif }) });
             } catch(err) { console.error(err); }
@@ -422,12 +427,16 @@
             const nom = document.getElementById('nom').value.trim(); if(!nom || !idUniqueActif || !confirm("Annuler l'inscription de " + nom + " ?")) return;
             const btnA = document.getElementById('btn-annuler'); btnA.disabled = true;
             cacheInscrits = cacheInscrits.filter(c => !(c.nom.toLowerCase() === nom.toLowerCase() && c.idUnique === idUniqueActif));
-            filtrerInscrits(); document.getElementById('nom').value = ""; btnA.style.display = "none";
+            
+            // CORRECTION : Le nom n'est plus effacé ici, on rafraîchit juste la liste et on cache le bouton
+            filtrerInscrits(); btnA.style.display = "none";
+            
             try {
                 await fetch(API_URL, { method: 'POST', body: JSON.stringify({ action: "annuler", nom: nom, idUnique: idUniqueActif }) });
             } catch(err) { console.error(err); }
             btnA.disabled = false;
         });
+
 
         document.getElementById('form-commentaire').addEventListener('submit', async function(e) {
             e.preventDefault(); const cNom = document.getElementById('comm-nom').value.trim(); const cMsg = document.getElementById('comm-msg').value.trim(); if (!cNom || !cMsg || !idUniqueActif) return;
