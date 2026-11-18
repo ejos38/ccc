@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Banque de parcours</title>
+<style>
+:root{
+  --bg:#F3F6F4; --card:#FFFFFF; --ink:#16221D; --muted:#5C6B64; --line:#D3DCD7;
+  --green:#2B6A4C; --green-d:#1E4D37; --sun:#E3B341; --err:#A3302A;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#101714; --card:#18231E; --ink:#EAF1ED; --muted:#9DB0A6; --line:#2B3B33;
+         --green:#4FA77C; --green-d:#7CCBA2; --sun:#E3B341; --err:#F08A82; color-scheme: dark; }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.5 "Avenir Next","Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+header{padding:28px 20px 8px;max-width:1100px;margin:auto}
+h1{margin:0;font-size:clamp(1.6rem,4vw,2.3rem);letter-spacing:-.02em}
+header p{margin:4px 0 0;color:var(--muted)}
+main{max-width:1100px;margin:auto;padding:12px 20px 60px}
+.filtres{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;
+  background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px}
+.filtres .q{grid-column:1/-1}
+label{display:block;font-size:.85rem;color:var(--muted);margin-bottom:3px}
+input,select,textarea{width:100%;padding:9px 10px;font:inherit;color:var(--ink);background:var(--bg);
+  border:1px solid var(--line);border-radius:6px}
+input:focus,select:focus,textarea:focus,button:focus-visible,a:focus-visible{outline:3px solid var(--sun);outline-offset:1px}
+.barre{display:flex;justify-content:space-between;align-items:center;margin:16px 2px 8px;color:var(--muted);font-size:.95rem;gap:12px;flex-wrap:wrap}
+.outils{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.outils label{margin:0}
+.outils select{width:auto}
+button{font:inherit;cursor:pointer;border-radius:6px;border:1px solid var(--green);padding:8px 14px}
+.lien{background:none;border:none;color:var(--green);text-decoration:underline;padding:0}
+.primaire{background:var(--green);color:#fff}
+.primaire:hover{background:var(--green-d)}
+.secondaire{background:transparent;color:var(--green)}
+.liste{display:grid;gap:12px}
+.parcours{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--green);
+  border-radius:8px;padding:14px 16px;display:grid;grid-template-columns:1fr auto;gap:8px 16px}
+.parcours h2{margin:0;font-size:1.1rem}
+.sous{color:var(--muted);font-size:.92rem}
+.chiffres{display:flex;gap:18px;flex-wrap:wrap;margin-top:6px}
+.chiffres b{font-size:1.15rem}
+.chiffres span{color:var(--muted);font-size:.85rem;margin-left:3px}
+.actions{display:flex;flex-direction:column;gap:6px;align-items:stretch;justify-content:center}
+.actions a{text-align:center;text-decoration:none;display:block}
+details{grid-column:1/-1}
+summary{cursor:pointer;color:var(--green);font-size:.92rem}
+details p{margin:6px 0 0;white-space:pre-line}
+.vide{padding:30px;text-align:center;color:var(--muted)}
+dialog{border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);
+  width:min(440px,92vw);padding:22px}
+dialog::backdrop{background:rgba(0,0,0,.45)}
+dialog h3{margin:0 0 2px}
+dialog form{display:grid;gap:12px;margin-top:14px}
+.btns{display:flex;gap:8px;justify-content:flex-end;margin-top:4px}
+#msg{min-height:1.4em;font-size:.92rem}
+.ok{color:var(--green)} .ko{color:var(--err)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--green-d);color:#fff;
+  padding:10px 18px;border-radius:8px;display:none}
+
+/* ===== Habillage coloré ===== */
+:root{
+  --n1:#2B6A4C; --n2:#E3B341; --n3:#E07B39; --n4:#B8332B;
+  --km:#2F6FA8; --km-bg:#E3EEF8; --dp:#B8571F; --dp-bg:#FBE9DD; --tps:#1E6B4A; --tps-bg:#E2F1E9;
+  --teal:#3F9A8B;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --n1:#4FA77C; --n3:#F0925A; --n4:#F08A82;
+    --km:#8CC2F0; --km-bg:#1E3246; --dp:#F2A272; --dp-bg:#3A2A20; --tps:#7CCBA2; --tps-bg:#1D3329; }
+}
+header{max-width:none;margin:0;padding:30px max(20px,calc((100% - 1100px)/2)) 24px;
+  background:linear-gradient(120deg,#1E4D37,#2B6A4C 55%,var(--teal));color:#fff;border-bottom:4px solid var(--sun)}
+header p{color:rgba(255,255,255,.88)}
+main{padding-top:20px}
+.filtres{border-top:4px solid var(--sun);box-shadow:0 2px 10px rgba(30,77,55,.10)}
+label{color:var(--green-d);font-weight:600}
+input,select,textarea{transition:border-color .15s,box-shadow .15s}
+input:hover,select:hover{border-color:var(--green)}
+#compteur{background:var(--green);color:#fff;padding:3px 14px;border-radius:999px;font-weight:600;font-size:.9rem}
+.outils label{color:var(--green-d)}
+.legende{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;margin:0 2px 12px;font-size:.85rem;color:var(--muted)}
+.legende span{display:inline-flex;align-items:center;gap:6px}
+.legende i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.parcours{border-left-color:var(--line);transition:box-shadow .15s,transform .15s}
+.parcours:hover{box-shadow:0 4px 14px rgba(30,77,55,.15);transform:translateY(-1px)}
+.parcours.n1{border-left-color:var(--n1)} .parcours.n2{border-left-color:var(--n2)}
+.parcours.n3{border-left-color:var(--n3)} .parcours.n4{border-left-color:var(--n4)}
+.parcours h2{color:var(--green-d)}
+.chiffres{gap:8px}
+.chiffres>div{padding:3px 12px;border-radius:999px}
+.chiffres span{color:inherit;opacity:.85}
+.c-km{background:var(--km-bg);color:var(--km)}
+.c-dp{background:var(--dp-bg);color:var(--dp)}
+.c-t{background:var(--tps-bg);color:var(--tps)}
+.actions a button.secondaire{background:var(--green);color:#fff}
+.actions a button.secondaire:hover{background:var(--green-d)}
+summary{font-weight:600}
+@media (prefers-reduced-motion: reduce){.parcours{transition:none}.parcours:hover{transform:none}}
+.parcours h2{font-weight:400}
+.parcours h2 strong{font-weight:700}
+.parcours h2 .par{color:var(--ink)}
+.etapes{white-space:pre-line;margin-top:2px}
+.etapes strong{color:var(--ink)}
+.groupe-temps{grid-column:span 2;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:440px){.groupe-temps{grid-column:auto}}
+@media (max-width:560px){.parcours{grid-template-columns:1fr}.actions{flex-direction:row}.actions>*{flex:1}}
+</style>
+</head>
+<body>
+<header>
+  <h1><span aria-hidden="true">⛰️</span> Banque de parcours</h1>
+  <p>Cherchez un parcours parmi la banque grâce aux filtres.</p>
+</header>
+
+<main>
+  <section class="filtres" aria-label="Filtres">
+    <div class="q"><label for="q">Recherche libre</label>
+      <input id="q" type="search" placeholder="Nom de lieu, créateur, étape…"></div>
+    <div><label for="f-createur">Créateur</label><select id="f-createur"></select></div>
+    <div><label for="f-secteur">Secteur</label><select id="f-secteur"></select></div>
+    <div><label for="f-depart">Départ</label><select id="f-depart"></select></div>
+    <div><label for="f-plage">Distance</label><select id="f-plage"></select></div>
+    <div><label for="f-deniv">Dénivelé</label>
+      <select id="f-deniv">
+        <option value="">Tous</option>
+        <option value="lt1000">Moins de 1000 m</option>
+        <option value="1000-1500">De 1000 à 1500 m</option>
+        <option value="1500-2000">De 1500 à 2000 m</option>
+        <option value="gt2000">Plus de 2000 m</option>
+      </select></div>
+    <div class="groupe-temps">
+    <div><label for="f-niveau">Niveau (pour le temps)</label>
+      <select id="f-niveau">
+        <option>Bleu</option>
+        <option selected>Rouge</option>
+        <option>Noir</option>
+      </select></div>
+    <div><label for="f-temps">Temps estimé</label>
+      <select id="f-temps">
+        <option value="">Tous</option>
+        <option value="lt3">Moins de 3 h</option>
+        <option value="3-4">De 3 h à 4 h</option>
+        <option value="4-5">De 4 h à 5 h</option>
+        <option value="gt5">Plus de 5 h</option>
+      </select></div>
+    </div>
+  </section>
+
+  <div class="barre">
+    <span id="compteur"></span>
+    <div class="outils">
+      <label for="tri">Tri</label>
+      <select id="tri">
+        <option value="">Aucun</option>
+        <option value="km-asc">Distance croissante</option>
+        <option value="km-desc">Distance décroissante</option>
+        <option value="deniv-asc">Dénivelé croissant</option>
+        <option value="deniv-desc">Dénivelé décroissant</option>
+        <option value="temps-asc">Temps estimé croissant</option>
+        <option value="temps-desc">Temps estimé décroissant</option>
+      </select>
+      <button class="lien" id="raz" type="button">Effacer les filtres</button>
+    </div>
+  </div>
+  <div class="legende" aria-hidden="true">Dénivelé :
+    <span><i style="background:var(--n1)"></i>&lt; 1000 m</span>
+    <span><i style="background:var(--n2)"></i>1000–1500 m</span>
+    <span><i style="background:var(--n3)"></i>1500–2000 m</span>
+    <span><i style="background:var(--n4)"></i>&gt; 2000 m</span>
+  </div>
+  <div id="liste" class="liste" aria-live="polite"></div>
+</main>
+
+
+<script>
+// ▼▼ À REMPLACER par l'URL de votre application web Apps Script (se termine par /exec)
+const API_URL = "https://script.google.com/macros/s/AKfycbxq0TPsLtXMFlGOZMQZlLg5WcVic8-VPSikrScCEvzl7GBBPNXIQzKce54RAX8bFWgkAQ/exec";
+// ▲▲
+
+const PLAGES_ORDRE = null; // laisser null : l'ordre des plages est déduit des km
+
+let tous = [], courant = null;
+const $ = id => document.getElementById(id);
+const norm = s => String(s ?? "").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().trim();
+const num = s => { const n = parseFloat(String(s).replace(",", ".").replace(/[^\d.\-]/g,"")); return isNaN(n) ? null : n; };
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+function lienOpenrunner(v){
+  v = String(v || "").trim();
+  if (!v) return "";
+  if (/^https?:\/\//i.test(v)) return v;
+  if (/^\d+$/.test(v)) return "https://www.openrunner.com/route-details/" + v;
+  return "";
+}
+
+async function charger(){
+  try{
+    const r = await fetch(API_URL);
+    const d = await r.json();
+    if(!d.ok) throw new Error(d.erreur || "Erreur du script");
+    tous = d.parcours;
+    remplirFiltres();
+    afficher();
+  }catch(e){
+    $("liste").innerHTML = '<div class="vide">Impossible de charger les parcours. Vérifiez l’URL du script dans la page et que le déploiement est ouvert à « Tout le monde ».</div>';
+    console.error(e);
+  }
+}
+
+function remplirSelect(id, cle, tri){
+  const vals = [...new Set(tous.map(p => String(p[cle]||"").trim()).filter(Boolean))];
+  vals.sort(tri || ((a,b)=>a.localeCompare(b,"fr")));
+  $(id).innerHTML = '<option value="">Tous</option>' + vals.map(v=>`<option>${esc(v)}</option>`).join("");
+}
+function remplirFiltres(){
+  remplirSelect("f-secteur","secteur");
+  remplirSelect("f-depart","depart");
+  remplirSelect("f-createur","createur");
+  remplirSelect("f-plage","plage",(a,b)=>(num(a)??0)-(num(b)??0));
+}
+
+// Vitesses moyennes (km/h) par niveau et tranche de dénivelé : identiques à getVitesse() du Sheet
+const VITESSES = {
+  Bleu:  { t1:20, t2:18, t3:16, t4:14 },
+  Rouge: { t1:22, t2:20, t3:18, t4:16 },
+  Noir:  { t1:24, t2:22, t3:21, t4:20 }
+};
+function heures(p, niveau){
+  const km = num(p.km);
+  if (!km || km <= 0 || !VITESSES[niveau]) return null;
+  const d = num(p.denivele) ?? 0;
+  const v = VITESSES[niveau];
+  const vitesse = d > 2000 ? v.t4 : d > 1500 ? v.t3 : d > 1000 ? v.t2 : v.t1;
+  return km / vitesse;
+}
+function formatTemps(h){
+  const mn = Math.round(h * 60);
+  return Math.floor(mn / 60) + " h " + String(mn % 60).padStart(2, "0") + " min";
+}
+
+function filtrer(){
+  const q = norm($("q").value).split(/\s+/).filter(Boolean);
+  const f = { secteur:$("f-secteur").value, depart:$("f-depart").value,
+              plage:$("f-plage").value, createur:$("f-createur").value };
+  const dn = $("f-deniv").value, ft = $("f-temps").value, niveauSel = $("f-niveau").value;
+  let res = tous.filter(p => {
+    for (const k in f) if (f[k] && String(p[k]).trim() !== f[k]) return false;
+    if (ft){
+      const h = heures(p, niveauSel);
+      if (h === null) return false;
+      if (ft === "lt3" && !(h < 3)) return false;
+      if (ft === "3-4" && !(h >= 3 && h <= 4)) return false;
+      if (ft === "4-5" && !(h > 4 && h <= 5)) return false;
+      if (ft === "gt5" && !(h > 5)) return false;
+    }
+    if (dn){
+      const d = num(p.denivele);
+      if (d === null) return false;
+      if (dn === "lt1000" && !(d < 1000)) return false;
+      if (dn === "1000-1500" && !(d >= 1000 && d < 1500)) return false;
+      if (dn === "1500-2000" && !(d >= 1500 && d <= 2000)) return false;
+      if (dn === "gt2000" && !(d > 2000)) return false;
+    }
+    const texte = norm(Object.values(p).join(" "));
+    return q.every(m => texte.includes(m));
+  });
+  const [champ, sens] = ($("tri").value || "").split("-");
+  if (champ){
+    const val = p => champ === "temps" ? heures(p, niveauSel)
+                   : num(p[champ === "km" ? "km" : "denivele"]);
+    res = [...res].sort((a,b) => ((val(a)??1e9)-(val(b)??1e9)) * (sens==="asc"?1:-1));
+  }
+  return res;
+}
+
+function afficher(){
+  const res = filtrer();
+  const niveauAff = $("f-niveau").value;
+  $("compteur").textContent = res.length + " parcours sur " + tous.length;
+  if(!res.length){ $("liste").innerHTML = '<div class="vide">Aucun parcours ne correspond. Essayez d’élargir les filtres.</div>'; return; }
+  $("liste").innerHTML = res.map(p => {
+    const url = lienOpenrunner(p.openrunner);
+    const th = heures(p, niveauAff), tp = th === null ? "" : formatTemps(th);
+    const dv = num(p.denivele);
+    const niv = dv === null ? "" : dv < 1000 ? "n1" : dv < 1500 ? "n2" : dv <= 2000 ? "n3" : "n4";
+    const detail = p.consigne || "";
+    return `<article class="parcours ${niv}">
+      <div>
+        <h2><strong>${esc(p.secteur || "Secteur non renseigné")}</strong>${p.createur?` <span class="par">par ${esc(p.createur)}</span>`:""}</h2>
+        ${(p.depart||p.etapes)?`<div class="sous etapes">${p.depart?`<strong>${esc(p.depart)}</strong>`:""}${p.depart&&p.etapes?" : ":""}${esc(p.etapes)}</div>`:""}
+        <div class="chiffres">
+          ${p.km?`<div class="c-km"><b>${esc(p.km)}</b><span>km</span></div>`:""}
+          ${p.denivele?`<div class="c-dp"><b>${esc(p.denivele)}</b><span>m D+</span></div>`:""}
+          ${tp?`<div class="c-t"><b>${esc(tp)}</b><span>estimé ${esc(niveauAff)}</span></div>`:""}
+        </div>
+      </div>
+      <div class="actions">
+        ${url?`<a class="secondaire" href="${esc(url)}" target="_blank" rel="noopener"><button class="secondaire" type="button" tabindex="-1" style="width:100%">Voir le tracé</button></a>`:""}
+      </div>
+      ${detail?`<details><summary>Consignes Départ</summary><p>${esc(detail)}</p></details>`:""}
+    </article>`;
+  }).join("");
+}
+
+["q","f-secteur","f-depart","f-plage","f-deniv","f-niveau","f-temps","f-createur","tri"].forEach(id => $(id).addEventListener("input", afficher));
+$("raz").onclick = () => { ["q","f-secteur","f-depart","f-plage","f-deniv","f-temps","f-createur","tri"].forEach(id => $(id).value=""); afficher(); };
+
+charger();
+</script>
+</body>
+</html>
